@@ -6,6 +6,7 @@
       :todos="todos"
       :meta="meta"
     ></example-component>
+    <q-btn class="bg-yellow-400" label="Primary" />
   </q-page>
 </template>
 
@@ -47,3 +48,9 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss">
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+</style>

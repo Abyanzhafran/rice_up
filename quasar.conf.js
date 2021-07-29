@@ -29,13 +29,10 @@ module.exports = configure((ctx) => ({
   // app boot file (/src/boot)
   // --> boot files are part of "main.js"
   // https://v2.quasar.dev/quasar-cli/boot-files
-  boot: [
-  ],
+  boot: [],
 
   // https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
-  css: [
-    'app.scss',
-  ],
+  css: ['app.scss'],
 
   // https://github.com/quasarframework/quasar/tree/dev/extras
   extras: [
@@ -195,13 +192,11 @@ module.exports = configure((ctx) => ({
 
     packager: {
       // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
-
       // OS X / Mac App Store
       // appBundleId: '',
       // appCategoryType: '',
       // osxSign: '',
       // protocol: 'myapp://path',
-
       // Windows only
       // win32metadata: { ... }
     },
