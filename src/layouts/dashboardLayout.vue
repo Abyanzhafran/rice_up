@@ -1,6 +1,6 @@
 <template>
     <q-layout view="hHh Lpr lff">
-      <q-header elevated class="bg-black">
+      <q-header elevated class="bg-gray-900">
         <q-toolbar>
           <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
           <q-toolbar-title>Header</q-toolbar-title>
@@ -15,7 +15,7 @@
         bordered
         class="bg-grey-3"
       >
-        <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
+        <q-scroll-area class="h-[calc(100%-150px)] mt-[150px] border-r">
           <q-list>
 
             <template v-for="(menuItem, index) in menuList" :key="index">
@@ -33,7 +33,7 @@
           </q-list>
         </q-scroll-area>
 
-         <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 150px">
+         <q-img class="absolute-top h-[150px]" src="https://cdn.quasar.dev/img/material.png">
           <div class="absolute-bottom bg-transparent">
             <q-avatar size="56px" class="q-mb-sm">
               <img src="https://cdn.quasar.dev/img/boy-avatar.png">
