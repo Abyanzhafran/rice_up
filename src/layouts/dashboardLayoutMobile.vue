@@ -1,26 +1,23 @@
 <template>
-  <q-layout view="lHh Lpr lFf" class="flex items-center justify-center">
-    <q-header elevated>
-
-      <q-toolbar class="flex justify-between">
+  <q-layout view="lHh Lpr lFf">
+    <q-header>
+      <q-toolbar class="flex justify-between bg-white px-6 pt-6">
         <q-btn
-          flat
-          dense
+          class="rounded-lg"
+          padding="sm"
+          outline
           icon="notifications"
-          aria-label="Notification"
+          color="amber"
         />
 
-        <div class="font-semibold text-lg">
-          Jack Hoodward
-        </div>
-
-        <div>
-        <q-avatar>
-          <img src="https://cdn.quasar.dev/img/avatar.png">
-        </q-avatar>
-        </div>
+        <q-btn
+          class="rounded-lg"
+          padding="sm"
+          outline
+          icon="settings"
+          color="black"
+        />
       </q-toolbar>
-
     </q-header>
 
     <q-page-container>
@@ -30,10 +27,8 @@
 </template>
 
 <script lang="ts">
-
 export default {
   // setup() {
-
   // },
 };
 </script>
