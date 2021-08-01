@@ -1,6 +1,7 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr lFf" class="flex items-center justify-center">
     <q-header elevated>
+
       <q-toolbar class="flex justify-between">
         <q-btn
           flat
@@ -19,6 +20,20 @@
         </q-avatar>
         </div>
       </q-toolbar>
+
     </q-header>
+
+    <q-page-container>
+      <router-view />
+    </q-page-container>
   </q-layout>
 </template>
+
+<script lang="ts">
+
+export default {
+  // setup() {
+
+  // },
+};
+</script>

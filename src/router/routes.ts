@@ -14,7 +14,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/dashboardMobile',
     component: () => import('layouts/dashboardLayoutMobile.vue'),
-    children: [{ path: '', component: () => import('pages/Index.vue') }],
+    children: [{ path: '', component: () => import('pages/dashboard/Account.vue') }],
   },
   // Always leave this as last one,
   // but you can also remove it
