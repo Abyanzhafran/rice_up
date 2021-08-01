@@ -57,7 +57,7 @@
     </q-layout>
 </template>
 
-<script>
+<script lang="ts">
 import { ref } from 'vue';
 
 const menuList = [
