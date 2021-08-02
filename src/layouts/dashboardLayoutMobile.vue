@@ -19,6 +19,20 @@
         />
       </q-toolbar>
     </q-header>
+    <q-footer bordered class="bg-white text-primary">
+      <q-tabs
+        no-caps
+        active-color="primary"
+        indicator-color="transparent"
+        class="text-grey"
+        v-model="tab"
+      >
+        <q-tab name="home" label="Home" icon="home" />
+        <q-tab name="explorasi" label="Explorasi" icon="explore" />
+        <q-tab name="talenta" label="Talenta" icon="grid_view" />
+        <q-tab name="akun" label="Akun" icon="person" />
+      </q-tabs>
+    </q-footer>
 
     <q-page-container>
       <router-view />
@@ -27,8 +41,14 @@
 </template>
 
 <script lang="ts">
-export default {
-  // setup() {
-  // },
-};
+import { defineComponent, ref } from "vue";
+
+export default defineComponent({
+  name: "PageAccount",
+  setup() {
+    return {
+      tab: ref("akun"),
+    };
+  },
+});
 </script>
