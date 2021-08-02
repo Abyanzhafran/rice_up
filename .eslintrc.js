@@ -87,6 +87,13 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'prefer-promise-reject-errors': 'off',
 
+    'max-len': ['warn', {
+      code: 150,
+      // will ignore everything inside html attrs
+      ignorePattern: '[\\w-]+="([^"]*)"',
+      ignoreStrings: true
+    }],
+
     // TypeScript
     quotes: ['warn', 'single', { avoidEscape: true }],
     '@typescript-eslint/explicit-function-return-type': 'off',

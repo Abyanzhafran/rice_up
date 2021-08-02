@@ -9,7 +9,16 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/dashboard',
     component: () => import('layouts/dashboardLayout.vue'),
-    children: [{ path: '', component: () => import('pages/Index.vue') }],
+    children: [
+      {
+        path: '',
+        component: () => import('pages/Index.vue'),
+      },
+      {
+        path: 'welcome',
+        component: () => import('pages/Welcome.vue'),
+      },
+    ],
   },
   {
     path: '/dashboardMobile',
