@@ -10,6 +10,8 @@
           color="amber"
         />
 
+        <span class="font-bold text-lg text-dark pt-2">Jack Hoodward</span>
+
         <q-btn
           class="rounded-lg"
           padding="sm"
