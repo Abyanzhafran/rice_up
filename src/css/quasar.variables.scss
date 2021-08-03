@@ -22,3 +22,10 @@ $positive  : #21BA45;
 $negative  : #C10015;
 $info      : #31CCEC;
 $warning   : #F2C037;
+
+// uses tailwind breakpoint https://tailwindcss.com/docs/responsive-design
+$breakpoint-xs: 640px !default;
+$breakpoint-sm: 768px !default;
+$breakpoint-md: 1024px !default;
+$breakpoint-lg: 1280px !default;
+$breakpoint-xl: 1536px !default;
