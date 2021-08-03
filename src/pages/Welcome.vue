@@ -5,9 +5,15 @@
     :style-fn="pageStyle"
   >
     <div>
-      <h2 class="font-bold text-3xl text-gray-700 leading-normal">Halo 👋</h2>
-      <h2 class="font-bold text-3xl text-gray-700 leading-normal">Selamat Datang!</h2>
-      <p class="text-sm text-gray-500">Pelajari keahlian baru, dan mulai akses kelasmu sekarang</p>
+      <h2 class="font-bold text-3xl text-gray-700 leading-normal">
+        Halo 👋
+      </h2>
+      <h2 class="font-bold text-3xl text-gray-700 leading-normal">
+        Selamat Datang!
+      </h2>
+      <p class="text-sm text-gray-500">
+        Pelajari keahlian baru, dan mulai akses kelasmu sekarang
+      </p>
     </div>
 
     <div class="flex flex-col gap-y-12 items-stretch">
@@ -19,7 +25,10 @@
         class="bg-white text-gray-900 before:border before:border-blue-300"
       />
 
-      <span class="text-sm text-gray-700 text-center">Belum punya akun? <router-link to="/" class="text-blue-500">Daftar sekarang</router-link></span>
+      <span class="text-sm text-gray-700 text-center">Belum punya akun? <router-link
+        to="/"
+        class="text-blue-500"
+      >Daftar sekarang</router-link></span>
     </div>
   </q-page>
 </template>
