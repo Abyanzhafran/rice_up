@@ -87,7 +87,10 @@
           </q-card>
         </q-carousel-slide>
       </q-carousel>
-      <span class="font-bold text-2xl">Kelas Populer</span>
+      <div class="flex justify-between w-full">
+        <span class="font-bold text-2xl text-left">Kelas Populer</span>
+        <div />
+      </div>
       <div
         v-for="n in 12"
         :key="n"
@@ -107,7 +110,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import CardProduct from 'components/cardProduct.vue';
+import cardProduct from 'components/cardProduct.vue';
 
 const slides = [
   {
@@ -126,7 +129,7 @@ const slides = [
 
 export default defineComponent({
   components: {
-    CardProduct,
+    cardProduct,
   },
   setup() {
     return {

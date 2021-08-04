@@ -1,8 +1,9 @@
 <template>
   <q-page class="flex justify-center mx-6">
-    <div class="w-full mx-auto pt-10 flex flex-col items-center gap-4">
+    <div class="w-full mx-auto pt-2 flex flex-col items-center gap-4">
       <q-select
         v-model="model"
+        class="w-full"
         outlined
         :options="options"
       />
