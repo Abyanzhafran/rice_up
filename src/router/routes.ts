@@ -14,11 +14,11 @@ const routes: RouteRecordRaw[] = [
         path: '',
         component: () => import('pages/Index.vue'),
       },
-      {
-        path: 'welcome',
-        component: () => import('pages/Welcome.vue'),
-      },
     ],
+  },
+  {
+    path: '/welcome',
+    component: () => import('pages/Welcome.vue'),
   },
   {
     path: '/dashboardMobile',
