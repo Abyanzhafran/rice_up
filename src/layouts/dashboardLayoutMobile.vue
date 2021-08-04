@@ -21,6 +21,13 @@
         />
       </q-toolbar>
     </q-header>
+
+    <q-page-container>
+      <slot>
+        <router-view />
+      </slot>
+    </q-page-container>
+
     <q-footer
       bordered
       class="bg-white text-primary"
@@ -32,32 +39,36 @@
         indicator-color="transparent"
         class="text-grey"
       >
-        <q-tab
-          name="home"
+        <q-route-tab
           label="Home"
+          name="home"
           icon="home"
+          to="/dashboardMobile"
+          exact
         />
-        <q-tab
-          name="explorasi"
+        <q-route-tab
           label="Explorasi"
+          name="explorasi"
           icon="explore"
+          to="/dashboardMobile/explore"
+          exact
         />
-        <q-tab
-          name="talenta"
+        <q-route-tab
           label="Talenta"
+          name="talenta"
           icon="grid_view"
+          to="/dashboardMobile/talent"
+          exact
         />
-        <q-tab
-          name="akun"
+        <q-route-tab
           label="Akun"
+          name="akun"
           icon="person"
+          to="/dashboardMobile/account"
+          exact
         />
       </q-tabs>
     </q-footer>
-
-    <q-page-container>
-      <router-view />
-    </q-page-container>
   </q-layout>
 </template>
 

@@ -25,6 +25,10 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/dashboardLayoutMobile.vue'),
     children: [
       {
+        path: '',
+        component: () => import('pages/dashboard/Home.vue'),
+      },
+      {
         path: 'account',
         component: () => import('pages/dashboard/Account.vue'),
       },
@@ -35,10 +39,6 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'explore',
         component: () => import('pages/dashboard/Explore.vue'),
-      },
-      {
-        path: '',
-        component: () => import('pages/dashboard/Home.vue'),
       },
     ],
   },

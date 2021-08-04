@@ -19,7 +19,7 @@
 
       <div class="flex flex-col gap-y-12 items-stretch">
         <q-btn
-          label="Login with Google"
+          label="Masuk dengan Google"
           icon="img:/google-brand.svg"
           rounded
           unelevated
