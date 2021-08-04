@@ -40,6 +40,10 @@ const routes: RouteRecordRaw[] = [
         path: 'explore',
         component: () => import('pages/dashboard/Explore.vue'),
       },
+      {
+        path: 'course',
+        component: () => import('pages/Course.vue'),
+      },
     ],
   },
   // Always leave this as last one,
