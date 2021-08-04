@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex justify-center mx-6">
-    <div class="w-full mx-auto pt-10 flex flex-col items-center gap-4">
+    <div class="w-full mx-auto pt-2 flex flex-col items-center gap-4">
       <q-carousel
         v-model="slide"
         transition-prev="jump-right"
@@ -11,20 +11,23 @@
         navigation-icon="radio_button_unchecked"
         navigation
         padding
-        height="175px"
+        height="210px"
         class="bg-transparent text-dark"
       >
         <q-carousel-slide
           name="style"
-          class="column no-wrap flex-center"
+          class="flex flex-col flex-nowrap"
         >
           <q-card
             class="rounded-2xl"
             flat
             bordered
           >
-            <q-card-section horizontal>
-              <q-card-section>
+            <q-card-section
+              horizontal
+              class="h-32"
+            >
+              <q-card-section class="flex items-center">
                 {{ lorem }}
               </q-card-section>
 
@@ -44,8 +47,11 @@
             flat
             bordered
           >
-            <q-card-section horizontal>
-              <q-card-section>
+            <q-card-section
+              horizontal
+              class="h-32"
+            >
+              <q-card-section class="flex items-center">
                 {{ lorem }}
               </q-card-section>
 
@@ -65,8 +71,11 @@
             flat
             bordered
           >
-            <q-card-section horizontal>
-              <q-card-section>
+            <q-card-section
+              horizontal
+              class="h-32"
+            >
+              <q-card-section class="flex items-center">
                 {{ lorem }}
               </q-card-section>
 
@@ -79,12 +88,26 @@
         </q-carousel-slide>
       </q-carousel>
       <span class="font-bold text-2xl">Kelas Populer</span>
+      <div
+        v-for="n in 12"
+        :key="n"
+        class="flex flex-row gap-3 my-2 justify-center"
+      >
+        <div
+          v-for="i in 2"
+          :key="i"
+          class="h-auto"
+        >
+          <card-product class="rounded-2xl" />
+        </div>
+      </div>
     </div>
   </q-page>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import CardProduct from 'components/cardProduct.vue';
 
 const slides = [
   {
@@ -102,6 +125,9 @@ const slides = [
 ];
 
 export default defineComponent({
+  components: {
+    CardProduct,
+  },
   setup() {
     return {
       slide: ref('style'),
