@@ -1,6 +1,9 @@
 <template>
-  <q-page class="w-full max-w-screen-sm mx-auto flex justify-center mx-6">
-    <div class="w-full mx-auto pt-10 flex flex-col items-center gap-4">
+  <q-page
+    padding
+    class="w-full max-w-screen-sm mx-auto flex justify-center"
+  >
+    <div class="w-full pt-10 flex flex-col items-center gap-4">
       <q-avatar class="w-20 h-20">
         <img src="https://cdn.quasar.dev/img/avatar.png">
       </q-avatar>
@@ -60,9 +63,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="scss">
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-</style>

@@ -1,5 +1,8 @@
 <template>
-  <q-page class="w-full max-w-screen-sm mx-auto row items-center justify-evenly">
+  <q-page
+    padding
+    class="w-full max-w-screen-sm mx-auto row items-center justify-evenly"
+  >
     <example-component
       title="Example component"
       active
@@ -14,9 +17,9 @@
 </template>
 
 <script lang="ts">
-import { Todo, Meta } from 'components/models';
-import ExampleComponent from 'components/CompositionComponent.vue';
 import { defineComponent, ref } from 'vue';
+import ExampleComponent from 'components/CompositionComponent.vue';
+import { Todo, Meta } from 'components/models';
 
 export default defineComponent({
   name: 'PageIndex',

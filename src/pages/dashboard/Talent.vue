@@ -1,6 +1,9 @@
 <template>
-  <q-page class="w-full max-w-screen-sm mx-auto flex justify-center mx-6">
-    <div class="w-full mx-auto pt-2 flex flex-col items-center gap-4">
+  <q-page
+    padding
+    class="w-full max-w-screen-sm mx-auto flex justify-center"
+  >
+    <div class="w-full pt-2 flex flex-col items-center gap-4">
       <q-select
         v-model="model"
         class="w-full"
@@ -43,9 +46,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="scss">
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-</style>

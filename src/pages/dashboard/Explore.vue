@@ -1,6 +1,9 @@
 <template>
-  <q-page class="w-full max-w-screen-sm mx-auto flex justify-center mx-6">
-    <div class="w-full mx-auto pt-2 flex flex-col items-center gap-4">
+  <q-page
+    padding
+    class="w-full max-w-screen-sm mx-auto flex justify-center"
+  >
+    <div class="w-full pt-2 flex flex-col items-center gap-4">
       <div class="flex flex-col w-full gap-4">
         <q-input
           v-model="text"
@@ -48,7 +51,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import CardProduct from 'components/CardProduct.vue';
+import CardProduct from 'components/cardProduct.vue';
 
 export default defineComponent({
   name: 'Explore',
