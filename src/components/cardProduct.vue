@@ -1,5 +1,8 @@
 <template>
-  <q-card class="product-card shadow-1">
+  <q-card
+    class="product-card shadow-1"
+    @click="open('bottom')"
+  >
     <q-img
       img-class="product-card__img"
       src="https://placeimg.com/500/300/nature"
@@ -41,16 +44,35 @@
       <small>Menpertani</small>
     </div>
   </q-card>
+  <class-view-dialog
+    v-model="dialog"
+    :position="position"
+  />
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
+import ClassViewDialog from 'components/ClassViewDialog.vue';
 
 export default defineComponent({
   name: 'CardProduct',
-  // setup() {
+  components: {
+    ClassViewDialog,
+  },
+  setup() {
+    const dialog = ref(false);
+    const position = ref('top');
 
-  // },
+    return {
+      dialog,
+      position,
+
+      open(pos: string) {
+        position.value = pos;
+        dialog.value = true;
+      },
+    };
+  },
 });
 </script>
 
