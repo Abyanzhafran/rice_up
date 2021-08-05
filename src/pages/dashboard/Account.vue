@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex justify-center mx-6">
+  <q-page class="w-full max-w-screen-sm mx-auto flex justify-center mx-6">
     <div class="w-full mx-auto pt-10 flex flex-col items-center gap-4">
       <q-avatar class="w-20 h-20">
         <img src="https://cdn.quasar.dev/img/avatar.png">
