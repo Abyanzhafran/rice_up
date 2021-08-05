@@ -110,7 +110,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import cardProduct from 'components/cardProduct.vue';
+import CardProduct from 'src/components/CardProduct.vue';
 
 const slides = [
   {
@@ -129,7 +129,7 @@ const slides = [
 
 export default defineComponent({
   components: {
-    cardProduct,
+    CardProduct,
   },
   setup() {
     return {

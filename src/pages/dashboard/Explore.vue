@@ -36,27 +36,54 @@
           :key="i"
           class="h-auto"
         >
-          <card-product class="rounded-2xl" />
+          <card-product
+            class="rounded-2xl"
+            clickable
+            @click="open('bottom')"
+          />
         </div>
       </div>
+      <class-view-dialog
+        v-model="dialog"
+        :position="position"
+      />
     </div>
   </q-page>
 </template>
-<script>
+
+<script lang="ts">
 import { defineComponent, ref } from 'vue';
-import cardProduct from 'components/cardProduct.vue';
+import CardProduct from 'components/CardProduct.vue';
+import ClassViewDialog from 'components/ClassViewDialog.vue';
 
 export default defineComponent({
   name: 'Explore',
   components: {
-    cardProduct,
+    CardProduct,
+    ClassViewDialog,
   },
   setup() {
+    const dialog = ref(false);
+    const position = ref('top');
+
     return {
       model: ref('All Tools'),
       text: ref(''),
       options: ['Photography Drone', 'Farmer Drone', 'Automatic Tractor', 'Automatic Sprinkler'],
+      dialog,
+      position,
+
+      open(pos: string) {
+        position.value = pos;
+        dialog.value = true;
+      },
     };
   },
 });
 </script>
+
+<style lang="scss">
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+</style>
