@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex justify-center mx-6">
+  <q-page class="w-full max-w-screen-sm mx-auto flex justify-center">
     <div class="w-full mx-auto pt-2 flex flex-col items-center gap-4">
       <q-video
         class="rounded-2xl w-full h-48"

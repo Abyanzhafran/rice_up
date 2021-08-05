@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex justify-center mx-6">
+  <q-page class="w-full max-w-screen-sm mx-auto flex justify-center mx-6">
     <div class="w-full mx-auto pt-2 flex flex-col items-center gap-4">
       <div class="flex flex-col w-full gap-4">
         <q-input
