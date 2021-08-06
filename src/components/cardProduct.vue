@@ -38,8 +38,11 @@
 
     <q-separator />
 
-    <div class="p-1 pl-3">
-      <q-icon name="place" />
+    <div class="flex items-center gap-2 ml-4 py-1">
+      <q-icon
+        name="spa"
+        class="text-green-500"
+      />
 
       <small>Menpertani</small>
     </div>
