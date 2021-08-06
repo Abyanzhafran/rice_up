@@ -8,7 +8,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/dashboard',
-    component: () => import('layouts/dashboardLayout.vue'),
+    component: () => import('layouts/DashboardLayout.vue'),
     children: [
       {
         path: '',
@@ -26,7 +26,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/dashboardMobile',
-    component: () => import('layouts/dashboardLayoutMobile.vue'),
+    component: () => import('layouts/DashboardLayoutMobile.vue'),
     children: [
       {
         path: '',
