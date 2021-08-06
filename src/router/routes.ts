@@ -21,6 +21,10 @@ const routes: RouteRecordRaw[] = [
     component: () => import('pages/Welcome.vue'),
   },
   {
+    path: '/splash',
+    component: () => import('pages/SplashScreen.vue'),
+  },
+  {
     path: '/dashboardMobile',
     component: () => import('layouts/dashboardLayoutMobile.vue'),
     children: [
