@@ -51,7 +51,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import CardProduct from 'components/cardProduct.vue';
+import CardProduct from 'components/CardProduct.vue';
 
 export default defineComponent({
   name: 'Explore',
@@ -67,9 +67,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="scss">
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-</style>

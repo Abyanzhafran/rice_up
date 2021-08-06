@@ -44,6 +44,10 @@ const routes: RouteRecordRaw[] = [
         path: 'course',
         component: () => import('pages/Course.vue'),
       },
+      {
+        path: 'orek2',
+        component: () => import('pages/dashboard/Orek2.vue'),
+      },
     ],
   },
   // Always leave this as last one,
