@@ -36,7 +36,14 @@
               <img src="https://cdn.quasar.dev/img/boy-avatar.png">
             </q-avatar>
           </q-item-section>
-          <q-item-section>List item</q-item-section>
+          <q-item-section>
+            <q-item-label caption>
+              Title
+            </q-item-label>
+            <q-item-label lines="1">
+              Short Description
+            </q-item-label>
+          </q-item-section>
           <q-item-section side>
             <q-item-label caption>
               <q-icon
