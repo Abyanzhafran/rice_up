@@ -7,6 +7,14 @@ const routes: RouteRecordRaw[] = [
     children: [{ path: '', component: () => import('pages/Index.vue') }],
   },
   {
+    path: '/welcome',
+    component: () => import('pages/Welcome.vue'),
+  },
+  {
+    path: '/splash',
+    component: () => import('pages/SplashScreen.vue'),
+  },
+  {
     path: '/dashboard',
     component: () => import('layouts/DashboardLayout.vue'),
     children: [
@@ -15,14 +23,6 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/Index.vue'),
       },
     ],
-  },
-  {
-    path: '/welcome',
-    component: () => import('pages/Welcome.vue'),
-  },
-  {
-    path: '/splash',
-    component: () => import('pages/SplashScreen.vue'),
   },
   {
     path: '/dashboardMobile',
@@ -47,6 +47,14 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'course',
         component: () => import('pages/Course.vue'),
+      },
+      {
+        path: 'notification',
+        component: () => import('pages/dashboard/Notification.vue'),
+      },
+      {
+        path: 'setting',
+        component: () => import('pages/dashboard/Setting.vue'),
       },
       {
         path: 'orek2',

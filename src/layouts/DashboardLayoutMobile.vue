@@ -4,6 +4,7 @@
       <q-toolbar class="flex justify-between bg-white px-6 py-4">
         <q-btn
           class="rounded-lg"
+          to="/dashboardMobile/notification"
           padding="sm"
           outline
           icon="notifications"
@@ -14,6 +15,7 @@
 
         <q-btn
           class="rounded-lg"
+          to="/dashboardMobile/setting"
           padding="sm"
           outline
           icon="settings"
