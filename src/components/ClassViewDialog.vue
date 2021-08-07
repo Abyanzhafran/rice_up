@@ -86,7 +86,24 @@
               </div>
             </q-toolbar>
             <span class="font-bold text-2xl text-left">Tentang Kelas</span>
-            <span>Selama ini pengawasan lahan</span>
+            <q-banner
+              bordered
+              class="w-full h-full text-dark bg-gray-100 shadow-lg rounded-xl"
+            >
+              <div class="flex items-center justify-start py-2">
+                <div class="flex flex-col">
+                  <span class="font-semibold pt-1 pb-2">Persyaratan :</span>
+                  <span
+                    v-for="n in 5"
+                    :key="n"
+                  >
+                    - Bertempat tinggal di....
+                  </span>
+                  <span class="font-semibold py-2">Deskripsi</span>
+                  <span>Lorem Ipsum Dolor Sit Amet</span>
+                </div>
+              </div>
+            </q-banner>
             <q-btn
               rounded
               color="primary"
