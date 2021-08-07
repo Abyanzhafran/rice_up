@@ -30,22 +30,23 @@
             v-for="(menuItem, index) in menuList"
             :key="index"
           >
-            <q-item
-              v-ripple
-              clickable
-              :active="menuItem.label === 'Outbox'"
+            <q-expansion-item
+              expand-icon-toggle
+              expand-separator
+              label="Pengenalan Drone"
+              class="font-bold"
             >
-              <q-item-section avatar>
-                <q-icon :name="menuItem.icon" />
-              </q-item-section>
-              <q-item-section>
-                {{ menuItem.label }}
-              </q-item-section>
-            </q-item>
-            <q-separator
-              v-if="menuItem.separator"
-              :key="'sep' + index"
-            />
+              <q-card>
+                <q-card-section class="flex flex-col font-normal">
+                  <span
+                    v-for="n in 3"
+                    :key="n"
+                  >
+                    Apa itu Drone ?
+                  </span>
+                </q-card-section>
+              </q-card>
+            </q-expansion-item>
           </template>
         </q-list>
       </q-scroll-area>
@@ -93,27 +94,6 @@ const menuList = [
   {
     icon: 'delete',
     label: 'Trash',
-    separator: false,
-  },
-  {
-    icon: 'error',
-    label: 'Spam',
-    separator: true,
-  },
-  {
-    icon: 'settings',
-    label: 'Settings',
-    separator: false,
-  },
-  {
-    icon: 'feedback',
-    label: 'Send Feedback',
-    separator: false,
-  },
-  {
-    icon: 'help',
-    iconColor: 'primary',
-    label: 'Help',
     separator: false,
   },
 ];

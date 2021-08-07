@@ -15,12 +15,12 @@ const routes: RouteRecordRaw[] = [
     component: () => import('pages/SplashScreen.vue'),
   },
   {
-    path: '/dashboard',
-    component: () => import('layouts/DashboardLayout.vue'),
+    path: '/dashboardCourse',
+    component: () => import('src/layouts/DashboardLayoutCourse.vue'),
     children: [
       {
         path: '',
-        component: () => import('pages/Index.vue'),
+        component: () => import('pages/dashboardCourse/CourseDetail.vue'),
       },
     ],
   },
