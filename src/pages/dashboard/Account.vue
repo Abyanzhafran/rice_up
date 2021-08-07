@@ -9,34 +9,38 @@
       </q-avatar>
 
       <span class="font-semibold text-lg pt-2">Jack Hoodward</span>
-      <q-btn
-        class="capitalize w-56"
-        outline
-        color="black"
+      <q-banner
+        class="w-full text-dark bg-white border-2 border-gray-500 rounded-full"
       >
-        Kelas Saya
-      </q-btn>
-      <q-card
-        class="mx-auto rounded-2xl"
-        flat
+        <div class="flex justify-center items-center">
+          <span class="font-bold text-xl p-0 text-blue-600">
+            Kelas Saya
+          </span>
+        </div>
+      </q-banner>
+
+      <q-list
+        class="w-full bg-white rounded-2xl"
         bordered
       >
-        <q-card-section
-          class="p-3 flex items-center gap-4"
-          horizontal
+        <q-item
+          v-ripple
+          to="/dashboardMobile/course"
+          class="border"
+          clickable
         >
-          <div class="w-auto">
-            <div class="text-xl line-clamp-2">
+          <q-item-section>
+            <q-item-label class="text-xl line-clamp-2">
               Drone sebagai pengawas lahan
-            </div>
-            <div class="font-normal">
+            </q-item-label>
+            <q-item-label class="font-normal">
               Menpertani
-            </div>
-          </div>
-          <div>
+            </q-item-label>
+          </q-item-section>
+          <q-item-section avatar>
             <q-circular-progress
               show-value
-              size="86px"
+              size="80px"
               :value="value"
               :thickness="0.3"
               color="teal"
@@ -44,9 +48,9 @@
             >
               <span class="m-4 text-xl font-semibold">{{ value }}%</span>
             </q-circular-progress>
-          </div>
-        </q-card-section>
-      </q-card>
+          </q-item-section>
+        </q-item>
+      </q-list>
     </div>
   </q-page>
 </template>
