@@ -25,6 +25,16 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
+    path: '/dashboardAdmin',
+    component: () => import('src/layouts/DashboardLayoutAdmin.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('pages/dashboardAdmin/Index.vue'),
+      },
+    ],
+  },
+  {
     path: '/dashboardMobile',
     component: () => import('layouts/DashboardLayoutMobile.vue'),
     children: [
