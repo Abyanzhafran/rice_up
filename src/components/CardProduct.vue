@@ -1,6 +1,6 @@
 <template>
   <q-card
-    class="product-card shadow-1"
+    class="product-card shadow-1 rounded-2xl"
     @click="open('bottom')"
   >
     <q-img

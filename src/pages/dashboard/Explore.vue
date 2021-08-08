@@ -34,8 +34,6 @@
           <card-product
             v-for="n in 8"
             :key="n"
-            class="rounded-2xl"
-            clickable
           />
         </div>
       </div>

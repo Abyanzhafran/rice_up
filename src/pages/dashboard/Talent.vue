@@ -10,22 +10,13 @@
         outlined
         :options="options"
       />
-      <div
-        v-for="n in 12"
-        :key="n"
-        class="flex flex-row gap-6 my-2 justify-center"
-      >
-        <div
-          v-for="i in 2"
-          :key="i"
-          class="w-40 h-auto flex gap-1"
-        >
-          <q-img
-            class="rounded-lg"
-            src="https://placeimg.com/500/300/nature"
-            :ratio="4/3"
+      <div class="flex flex-col my-4">
+        <div class="flex flex-row justify-center gap-x-3 gap-y-6 max-w-sm">
+          <card-product-tools
+            v-for="n in 8"
+            :key="n"
+            v-ripple
           />
-          <span class="font-bold">Drone Photography</span>
         </div>
       </div>
     </div>
@@ -34,9 +25,13 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import CardProductTools from 'src/components/CardProductTools.vue';
 
 export default defineComponent({
   name: 'Talent',
+  components: {
+    CardProductTools,
+  },
   setup() {
     return {
       model: ref('All Tools'),
