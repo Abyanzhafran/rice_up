@@ -29,17 +29,11 @@
           </div>
         </div>
       </div>
-      <div
-        v-for="n in 12"
-        :key="n"
-        class="flex flex-row gap-3 my-4 justify-center"
-      >
-        <div
-          v-for="i in 2"
-          :key="i"
-          class="h-auto"
-        >
+      <div class="flex flex-col my-4">
+        <div class="flex flex-row justify-center gap-x-3 gap-y-6 max-w-sm">
           <card-product
+            v-for="n in 8"
+            :key="n"
             class="rounded-2xl"
             clickable
           />
