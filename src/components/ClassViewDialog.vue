@@ -1,11 +1,10 @@
 <template>
   <q-dialog>
     <q-card
-      class="w-full rounded-t-2xl"
-      bordered
-      flat
+      class="w-full -mb-8"
+      style="border-radius: 30px"
     >
-      <q-card-section>
+      <q-card-section class="rounded-2xl">
         <div class="w-full pt-2 flex flex-col items-center gap-4">
           <div class="flex flex-col justify-start w-full gap-4 px-auto">
             <q-video
@@ -105,6 +104,7 @@
               </div>
             </q-banner>
             <q-btn
+              class="mb-8"
               rounded
               color="primary"
               label="Daftar Kelas"
@@ -123,3 +123,25 @@ export default defineComponent({
   name: 'ClassViewDialog',
 });
 </script>
+
+<style lang="scss">
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+</style>

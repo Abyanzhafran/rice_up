@@ -3,7 +3,7 @@
     <router-link to="/dashboardMobile/explore">
       <q-card-section class="p-2">
         <img
-          src="https://cdn.quasar.dev/img/mountains.jpg"
+          src="~assets/Drone.jpg"
           class="rounded-2xl"
         >
         <div class="font-semibold pt-2 pl-2">

@@ -67,6 +67,10 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/dashboard/Setting.vue'),
       },
       {
+        path: 'machinespec',
+        component: () => import('pages/dashboard/MachineSpec.vue'),
+      },
+      {
         path: 'orek2',
         component: () => import('pages/dashboard/Orek2.vue'),
       },
