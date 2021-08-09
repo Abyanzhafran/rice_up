@@ -1,21 +1,44 @@
-import { CourseClassFirestoreClientRepository } from 'core/CourseClass/FirestoreRepository';
+/* eslint-disable no-console */
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
+import { CourseClassFirestoreClientRepository } from 'core/CourseClass/FirestoreRepository';
 import firebaseJson from 'app/firebase.json';
+import { CourseClassUseCases } from 'core/CourseClass/UseCases';
+
+const DEFAULT_EMULATOR_HOST = 'localhost';
 
 const app = getApps().length
   ? getApp()
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  : initializeApp(JSON.parse(atob(process.env.FIREBASE_CONFIG!)));
-
+  : initializeApp(JSON.parse(atob(String(process.env.FIREBASE_CONFIG))));
 const db = getFirestore(app);
 
-connectFirestoreEmulator(db, 'localhost', firebaseJson.emulators.firestore.port);
+const connectToEmulator = () => {
+  const connect = () => {
+    try {
+      connectFirestoreEmulator(db, DEFAULT_EMULATOR_HOST, firebaseJson.emulators.firestore.port);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  let isCalled = false;
 
-const CourseRepository = new CourseClassFirestoreClientRepository(db);
+  return () => {
+    if (!isCalled) {
+      isCalled = true;
+      connect();
+    }
+  };
+};
+
+if (process.env.FIREBASE_USE_EMULATOR) {
+  connectToEmulator();
+}
+
+const CourseClassRepository = new CourseClassFirestoreClientRepository(db);
+const CourseClassUseCase = new CourseClassUseCases(CourseClassRepository);
 
 export {
   app as fbApp,
   db,
-  CourseRepository,
+  CourseClassUseCase,
 };

@@ -1,37 +1,35 @@
 <template>
   <q-card
     class="product-card shadow-1 rounded-2xl"
+    v-bind="$attrs"
     @click="open('bottom')"
   >
     <q-img
       img-class="product-card__img"
-      src="https://placeimg.com/500/300/nature"
+      :src="thumbnailSrc"
+      :ratio="4/3"
     />
 
-    <q-card-section
-      class="column items-baseline"
-      style="height: 6rem;"
-    >
-      <h6
-        class="q-mt-none q-mb-sm full-width text-body1 text-weight-regular ellipsis"
-        style="line-height: 1.1;"
-      >
-        Lorem
+    <q-card-section class="column items-baseline h-24">
+      <h6 class="q-mt-none q-mb-sm full-width text-body1 text-weight-regular ellipsis leading-[1.1]">
+        {{ title }}
       </h6>
 
       <small
+        v-if="discountPrice"
         class="text-grey text-strike"
       >
-        Rp. 21.000
+        {{ formatCurrency(discountPrice) }}
       </small>
 
       <span class="text-body2 text-weight-medium">
-        Rp. 20.000
+        {{ formatCurrency(price) }}
       </span>
     </q-card-section>
 
     <q-badge
-      label="50%"
+      v-if="discountLabel"
+      :label="discountLabel"
       floating
       class="z-index-10"
     />
@@ -40,13 +38,14 @@
 
     <div class="flex items-center gap-2 ml-4 py-1">
       <q-icon
-        name="spa"
+        :name="trainerIcon"
         class="text-green-500"
       />
 
-      <small>Menpertani</small>
+      <small>{{ trainerName }}</small>
     </div>
   </q-card>
+
   <class-view-dialog
     v-model="dialog"
     :position="position"
@@ -57,10 +56,42 @@
 import { defineComponent, ref } from 'vue';
 import ClassViewDialog from 'components/ClassViewDialog.vue';
 
+const formatCurrency = (n: number) => n.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
+
 export default defineComponent({
   name: 'CardProduct',
   components: {
     ClassViewDialog,
+  },
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+    trainerName: {
+      type: String,
+      required: true,
+    },
+    trainerIcon: {
+      type: String,
+      default: 'account_circle',
+    },
+    thumbnailSrc: {
+      type: String,
+      default: 'https://via.placeholder.com/100',
+    },
+    price: {
+      type: Number,
+      default: NaN,
+    },
+    discountPrice: {
+      type: Number,
+      default: NaN,
+    },
+    discountLabel: {
+      type: String,
+      default: '',
+    },
   },
   setup() {
     const dialog = ref(false);
@@ -74,6 +105,8 @@ export default defineComponent({
         position.value = pos;
         dialog.value = true;
       },
+
+      formatCurrency,
     };
   },
 });
