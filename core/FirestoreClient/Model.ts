@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 /* eslint-disable no-use-before-define */
 import { Timestamp as FirestoreTimestamp } from 'firebase/firestore';
-import { isFileBlobDataType, isFileDataType } from 'core/Model';
+import { isFileBlobDataType, isFileDataType, isRefDataType } from 'core/Model';
 import { isEmpty, isObject } from 'core/helpers';
 import type { DataType, Model } from 'core/Model';
 
@@ -12,6 +12,7 @@ export namespace FirestoreDataType {
   }
   export type File = FileStorage | DataType.FileUrl;
   export type Timestamp = FirestoreTimestamp;
+  export type Ref = DataType.Ref;
   export type List<T = PossibleValue> = T[];
   export type Dict<T = PossibleValue> = Record<string, T>;
   export type Primitive = DataType.String
@@ -20,7 +21,8 @@ export namespace FirestoreDataType {
     | DataType.Bool;
   export type PossibleValue = Primitive
     | FirestoreDataType.Timestamp
-    | FirestoreDataType.File;
+    | FirestoreDataType.File
+    | FirestoreDataType.Ref;
   export type PossibleType = PossibleValue
     | FirestoreDataType.Dict
     | FirestoreDataType.List;
@@ -62,20 +64,25 @@ class UnsupportedFileBlobDataType extends Error {
   }
 }
 
+const shouldSkipConvertDataType = <V extends DataType.PossibleType | FirestoreDataType.PossibleType>(v: V) => (
+  typeof v === 'string'
+  && typeof v === 'number'
+  && typeof v === 'boolean'
+  && isFileDataType(v)
+  && isRefDataType(v)
+);
+
 export const modelDataTypeToFirestoreDataType = <V extends DataType.PossibleType>(v: V): FirestoreDataType.PossibleType => {
   if (isEmpty(v)) {
     return null;
   }
 
-  if (isFileBlobDataType(v)) {
-    throw new UnsupportedFileBlobDataType();
+  if (shouldSkipConvertDataType(v)) {
+    return v as FirestoreDataType.PossibleType;
   }
 
-  if (typeof v === 'string'
-    || typeof v === 'number'
-    || typeof v === 'boolean'
-    || isFileDataType(v)) {
-    return v as FirestoreDataType.PossibleType;
+  if (isFileBlobDataType(v)) {
+    throw new UnsupportedFileBlobDataType();
   }
 
   if (v instanceof Date) {
@@ -102,15 +109,12 @@ export const firestoreDataTypeToModelDataType = <V extends FirestoreDataType.Pos
     return null;
   }
 
-  if (isFileBlobDataType(v)) {
-    throw new UnsupportedFileBlobDataType();
+  if (shouldSkipConvertDataType(v)) {
+    return v as DataType.PossibleType;
   }
 
-  if (typeof v === 'string'
-    || typeof v === 'number'
-    || typeof v === 'boolean'
-    || isFileDataType(v)) {
-    return v as DataType.PossibleType;
+  if (isFileBlobDataType(v)) {
+    throw new UnsupportedFileBlobDataType();
   }
 
   if (v instanceof FirestoreTimestamp) {

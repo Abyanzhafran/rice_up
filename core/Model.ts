@@ -20,6 +20,10 @@ export namespace DataType {
     value: Blob;
   }
   export type File = FileUrl | FileBlob;
+  export type Ref = {
+    type: 'Ref',
+    value: string;
+  }
   export type List<T = PossibleValue> = T[];
   export type Dict<T = PossibleValue> = Record<string, T>;
   export type Primitive = DataType.String
@@ -28,10 +32,16 @@ export namespace DataType {
     | Bool;
   export type PossibleValue = Primitive
     | Timestamp
-    | File;
+    | File
+    | Ref;
   export type PossibleType = PossibleValue
     | List
     | Dict;
+  // Shared DataType
+  export type Money = {
+    currency: DataType.String;
+    value: DataType.Number;
+  }
 }
 
 export interface Model {
@@ -41,6 +51,11 @@ export interface Model {
   _updated: DataType.Timestamp;
   _deleted: DataType.Timestamp | DataType.Empty;
 }
+
+export const isRefDataType = (v: any): v is DataType.Ref => (
+  !isEmpty(v)
+  && String(v.type) === 'Ref'
+);
 
 export const isFileDataType = (v: any): v is DataType.File => (
   !isEmpty(v)

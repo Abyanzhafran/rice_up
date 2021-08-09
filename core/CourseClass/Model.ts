@@ -8,10 +8,7 @@ export interface CourseClass extends Model {
   ratingCount: DataType.Number;
   participantNumb: DataType.Number;
   // TODO: create reference DataType
-  trainer: DataType.String;
-  price: {
-    currency: DataType.String;
-    value: DataType.Number;
-  };
+  trainer: DataType.Ref;
+  price: DataType.Money;
   aboutContent: DataType.File;
 }
