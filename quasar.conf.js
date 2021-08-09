@@ -11,6 +11,7 @@
 /* eslint func-names: 0 */
 /* eslint global-require: 0 */
 const { configure } = require('quasar/wrappers');
+const { resolve } = require('path');
 
 module.exports = configure((ctx) => ({
   // https://v2.quasar.dev/quasar-cli/supporting-ts
@@ -51,6 +52,7 @@ module.exports = configure((ctx) => ({
   // Full list of options: https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
   build: {
     vueRouterMode: 'history', // available values: 'hash', 'history'
+    env: require('dotenv').config().parsed,
 
     // transpile: false,
 
@@ -70,8 +72,10 @@ module.exports = configure((ctx) => ({
 
     // https://v2.quasar.dev/quasar-cli/handling-webpack
     // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
-    chainWebpack(/* chain */) {
-      //
+    chainWebpack(chain) {
+      chain.resolve.alias.merge({
+        core: resolve(__dirname, './core'),
+      });
     },
   },
 
@@ -84,7 +88,7 @@ module.exports = configure((ctx) => ({
 
   // https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
   framework: {
-    config: { notify: {} },
+    config: {},
 
     // iconSet: 'material-icons', // Quasar icon set
     // lang: 'en-US', // Quasar language pack
