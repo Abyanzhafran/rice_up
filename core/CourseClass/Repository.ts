@@ -1,8 +1,4 @@
-import { createFirestoreClientRepository } from 'core/FirestoreClient/createRepository';
 import type { CourseClass } from 'core/CourseClass/Model';
+import { IFirestoreClientRepository } from 'core/FirestoreClient/Repository';
 
-const collectionName = 'COURSE_CLASSES';
-
-export const CourseClassFirestoreRepository = createFirestoreClientRepository<CourseClass>({
-  collectionName,
-});
+export type CourseClassRepository = IFirestoreClientRepository<CourseClass>;

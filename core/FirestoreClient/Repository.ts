@@ -2,20 +2,24 @@ import {
   doc, getDoc, getDocs, addDoc, updateDoc, query, where,
 } from 'firebase/firestore';
 import type {
-  DocumentReference, CollectionReference, DocumentSnapshot, QueryDocumentSnapshot, QuerySnapshot, SnapshotOptions,
-  Query, FirestoreDataConverter,
+  DocumentReference, CollectionReference, QueryDocumentSnapshot, SnapshotOptions,
+  Query, FirestoreDataConverter, Firestore,
 } from 'firebase/firestore';
 import { modelDataTypeToFirestoreDataType, firestoreDataTypeToModelDataType } from 'core/FirestoreClient/Model';
 import type { Model } from 'core/Model';
 import type { ModelToFirestoreModel as ModelToFsModel } from 'core/FirestoreClient/Model';
 
 export interface IFirestoreClientRepository<M extends Model> {
-  getById(id: string): Promise<DocumentSnapshot<M>>;
-  getAll(): Promise<QuerySnapshot<M>>;
-  execQuery(q: Query<M>, includeDeleted: boolean): Promise<QuerySnapshot<M>>;
-  create(data: M): Promise<DocumentReference<M>>;
-  update(docRef: DocumentReference<M>, data: Partial<M>): Promise<void>;
-  delete(docRef: DocumentReference<M>): Promise<void>;
+  get(id: string): Promise<M | undefined>;
+  getAll(): Promise<M[]>;
+  create(data: Omit<M, '_uid' | '_created' | '_updated' | '_deleted'>): Promise<() => Promise<M>>;
+  update(data: Omit<Partial<M>, '_created' | '_updated' | '_deleted'> & Pick<M, '_uid'>): Promise<void>;
+  delete(id: string): Promise<void>;
+  restoreDeleted(id: string): Promise<() => Promise<M | undefined>>;
+}
+
+export interface FirestoreClientRepositoryCtor<M extends Model> {
+  new (firestore: Firestore): IFirestoreClientRepository<M>
 }
 
 export class FirestoreClientRepository<M extends Model> implements IFirestoreClientRepository<M> {
@@ -27,55 +31,86 @@ export class FirestoreClientRepository<M extends Model> implements IFirestoreCli
     this.converter = FirestoreClientRepository.createConverter();
   }
 
-  public getById(id: string) {
+  public async get(id: string) {
     const docRef = doc(this.collectionRef, id);
+    const snap = await this._get(docRef);
 
-    return this.get(docRef);
+    return snap.data();
   }
 
-  public getAll() {
-    return this.execQuery(this.collectionRef);
+  public async getAll() {
+    const snaps = await this._execQuery(this.collectionRef);
+
+    return snaps.docs.map((snap) => snap.data());
   }
 
-  public create(data: Omit<M, '_uid' | '_created' | '_updated' | '_deleted'>) {
-    return addDoc(this.useRef(this.collectionRef), {
+  public async create(data: Omit<M, '_uid' | '_created' | '_updated' | '_deleted'>) {
+    const docRef = await addDoc(this._useRef(this.collectionRef), {
       ...data,
       ...FirestoreClientRepository.createAttrsFactory(),
     } as M);
+
+    return this._getModelFactoryByRef(docRef) as () => Promise<M>;
   }
 
-  public update(docRef: DocumentReference<M>, data: Partial<M>) {
+  public update({ _uid, ...data }: Omit<Partial<M>, '_created' | '_updated' | '_deleted'> & Pick<M, '_uid'>) {
+    const docRef = doc(this.collectionRef, _uid);
+
     // ensure the input using converter
-    return updateDoc(this.useRef(docRef), {
+    return updateDoc(this._useRef(docRef), {
       ...data,
       ...FirestoreClientRepository.updateAttrsFactory(),
     });
   }
 
-  public delete(docRef: DocumentReference<M>) {
+  public delete(id: string) {
+    const docRef = doc(this.collectionRef, id);
+
     return updateDoc(
       // ensure the input using converter
-      this.useRef(docRef),
+      this._useRef(docRef),
       FirestoreClientRepository.deleteAttrsFactory(),
     );
   }
 
-  public get(docRef: DocumentReference<M>) {
-    return getDoc(this.useRef(docRef));
+  public async restoreDeleted(id: string) {
+    const docRef = doc(this.collectionRef, id);
+
+    void await updateDoc(
+      // ensure the input using converter
+      this._useRef(docRef),
+      FirestoreClientRepository.restoreAttrsFactory(),
+    );
+
+    return this._getModelFactoryByRef(docRef);
   }
 
-  public execQuery(q: Query<M>, includeDeleted = false) {
+  public _get(docRef: DocumentReference<M>) {
+    return getDoc(this._useRef(docRef));
+  }
+
+  public _getModelFactoryByRef(docRef: DocumentReference<M>) {
+    const ref = this._useRef(docRef);
+
+    return async () => {
+      const snap = await getDoc(ref);
+
+      return snap.data();
+    };
+  }
+
+  public _execQuery(q: Query<M>, includeDeleted = false) {
     const finalQuery = includeDeleted
       ? q
       : query(q, where('_deleted', '==', null));
 
-    return getDocs(this.useRef(finalQuery));
+    return getDocs(this._useRef(finalQuery));
   }
 
   /**
    * @description just proxying for everything ref use
    */
-  public useRef<T extends CollectionReference<M> | DocumentReference<M> | Query<M>>(ref: T) {
+  public _useRef<T extends CollectionReference<M> | DocumentReference<M> | Query<M>>(ref: T) {
     // bug? should use DocumentReference type assertion to get better `withConverter()` typings
     // it make me to use assertion again in the end 😑
     return (ref.withConverter as DocumentReference['withConverter'])(this.converter) as T;
@@ -134,6 +169,12 @@ export class FirestoreClientRepository<M extends Model> implements IFirestoreCli
   public static deleteAttrsFactory() {
     return {
       _deleted: new Date(),
+    };
+  }
+
+  public static restoreAttrsFactory() {
+    return {
+      _deleted: null,
     };
   }
 }

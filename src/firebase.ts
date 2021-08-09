@@ -1,4 +1,4 @@
-import { CourseClassFirestoreRepository } from 'core/CourseClass/Repository';
+import { CourseClassFirestoreClientRepository } from 'core/CourseClass/FirestoreRepository';
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
 import firebaseJson from 'app/firebase.json';
@@ -12,7 +12,7 @@ const db = getFirestore(app);
 
 connectFirestoreEmulator(db, 'localhost', firebaseJson.emulators.firestore.port);
 
-const CourseRepository = new CourseClassFirestoreRepository(db);
+const CourseRepository = new CourseClassFirestoreClientRepository(db);
 
 export {
   app as fbApp,

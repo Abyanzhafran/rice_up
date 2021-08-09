@@ -1,5 +1,5 @@
 import { collection } from 'firebase/firestore';
-import { FirestoreClientRepository } from 'core/FirestoreClient/Repository';
+import { FirestoreClientRepository, FirestoreClientRepositoryCtor } from 'core/FirestoreClient/Repository';
 import type { Firestore, CollectionReference } from 'firebase/firestore';
 import type { Model } from 'core/Model';
 
@@ -12,5 +12,5 @@ export const createFirestoreClientRepository = function <M extends Model> ({ col
     constructor(private firestore: Firestore) {
       super(collection(firestore, collectionName) as CollectionReference<M>);
     }
-  };
+  } as FirestoreClientRepositoryCtor<M>;
 };
