@@ -56,6 +56,15 @@ module.exports = {
 
   ],
 
+  overrides: [
+    {
+      files: ['*.ts'],
+      rules: {
+        'no-useless-constructor': 'off'
+      }
+    }
+  ],
+
   globals: {
     ga: 'readonly', // Google Analytics
     cordova: 'readonly',
@@ -74,7 +83,9 @@ module.exports = {
     'no-param-reassign': 'off',
     'no-void': 'off',
     'no-nested-ternary': 'off',
+    'no-underscore-dangle': 'off',
     'max-classes-per-file': 'off',
+    'func-names': 'off',
 
     'import/first': 'off',
     'import/named': 'error',
@@ -98,6 +109,8 @@ module.exports = {
     quotes: ['warn', 'single', { avoidEscape: true }],
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': ['error'],
 
     // allow debugger during development only
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'

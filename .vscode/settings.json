@@ -4,7 +4,12 @@
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
   "typescript.tsdk": "node_modules/typescript/lib",
   "vetur.experimental.templateInterpolationService": true,
-  "conventionalCommits.scopes": ["config", "page"],
+  "conventionalCommits.scopes": [
+    "config",
+    "page",
+    "core",
+    "ui"
+  ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },

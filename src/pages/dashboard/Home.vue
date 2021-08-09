@@ -90,15 +90,22 @@
           </q-card>
         </q-carousel-slide>
       </q-carousel>
+
       <div class="flex justify-between w-full">
         <span class="font-bold text-2xl text-left">Kelas Populer</span>
         <div />
       </div>
+
       <div class="flex flex-col my-4">
         <div class="flex flex-row justify-center gap-x-3 gap-y-6 max-w-sm">
           <card-product
-            v-for="n in 8"
-            :key="n"
+            v-for="el, i in courseClasses"
+            :key="i"
+            :title="el.title"
+            :trainer-name="el.trainerName"
+            :price="el.price"
+            :discount-label="el.discountLabel"
+            :discount-price="el.discountPrice"
           />
         </div>
       </div>
@@ -107,7 +114,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, reactive, toRefs } from 'vue';
 import CardProduct from 'src/components/CardProduct.vue';
 
 const slides = [
@@ -125,16 +132,29 @@ const slides = [
   },
 ];
 
+const randBool = () => Math.random() > 0.5;
+
+const generateCourseClass = () => ({
+  title: 'Perluasan lahan sengketa dengan Cepat!',
+  trainerName: 'BUMN',
+  price: Math.random() * 100_000,
+  discountPrice: randBool() ? Math.random() * 100_000 : NaN,
+  discountLabel: randBool() ? '50%' : '',
+});
+
 export default defineComponent({
   components: {
     CardProduct,
   },
   setup() {
-    return {
-      slide: ref('style'),
+    const state = reactive({
+      slide: 'style',
       lorem: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
       slides,
-    };
+      courseClasses: Array.from(Array(8), generateCourseClass),
+    });
+
+    return toRefs(state);
   },
 });
 </script>

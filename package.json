@@ -1,18 +1,24 @@
 {
-  "name": "rice_up",
+  "name": "rice-up",
   "version": "0.0.1",
   "description": "A Quasar Framework app",
   "productName": "Quasar App",
   "author": "Abyanzhafran <zhafranjupleks5758@gmail.com>",
   "private": true,
+  "workspaces": [
+    "functions"
+  ],
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue --fix --cache ./",
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "echo \"No test specified\" && exit 0",
+    "emulator": "firebase emulators:start --import=\"./emulator\" --export-on-exit"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "@tailwindcss/line-clamp": "^0.2.1",
+    "@vueuse/core": "^5.2.0",
     "core-js": "^3.6.5",
+    "firebase": "^9.0.0-beta.8",
     "quasar": "^2.0.0",
     "tailwindcss": "^2.2.7"
   },
@@ -23,10 +29,12 @@
     "@types/tailwindcss": "^2.2.1",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "@typescript-eslint/parser": "^4.16.1",
+    "dotenv": "^10.0.0",
     "eslint": "^7.14.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-vue": "^7.0.0"
+    "eslint-plugin-vue": "^7.0.0",
+    "typescript": "^4.3.5"
   },
   "browserslist": [
     "last 10 Chrome versions",
