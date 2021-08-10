@@ -35,12 +35,17 @@
               clickable
               :active="menuItem.label === 'Outbox'"
             >
-              <q-item-section avatar>
-                <q-icon :name="menuItem.icon" />
-              </q-item-section>
-              <q-item-section>
-                {{ menuItem.label }}
-              </q-item-section>
+              <router-link
+                :to="menuItem.link"
+                class="flex flex-row"
+              >
+                <q-item-section avatar>
+                  <q-icon :name="menuItem.icon" />
+                </q-item-section>
+                <q-item-section>
+                  {{ menuItem.label }}
+                </q-item-section>
+              </router-link>
             </q-item>
           </template>
         </q-list>
@@ -60,28 +65,13 @@ import { ref } from 'vue';
 const menuList = [
   {
     icon: 'inbox',
-    label: 'Inbox',
-    separator: true,
+    label: 'ModuleEditor',
+    link: '/dashboardAdmin',
   },
   {
     icon: 'send',
-    label: 'Outbox',
-    separator: false,
-  },
-  {
-    icon: 'delete',
-    label: 'Trash',
-    separator: false,
-  },
-  {
-    icon: 'error',
-    label: 'Spam',
-    separator: true,
-  },
-  {
-    icon: 'settings',
-    label: 'Settings',
-    separator: false,
+    label: 'ManageModules',
+    link: '/dashboardAdmin/manage_module',
   },
 ];
 

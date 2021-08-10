@@ -32,6 +32,18 @@ const routes: RouteRecordRaw[] = [
         path: '',
         component: () => import('pages/dashboardAdmin/Index.vue'),
       },
+      {
+        path: 'manage_module',
+        component: () => import('pages/dashboardAdmin/ManageModules.vue'),
+      },
+      {
+        path: 'module_show',
+        component: () => import('pages/dashboardAdmin/ModuleShow.vue'),
+      },
+      {
+        path: 'orek2',
+        component: () => import('pages/dashboardAdmin/Orek2.vue'),
+      },
     ],
   },
   {
@@ -69,10 +81,6 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'machinespec',
         component: () => import('pages/dashboard/MachineSpec.vue'),
-      },
-      {
-        path: 'orek2',
-        component: () => import('pages/dashboard/Orek2.vue'),
       },
     ],
   },
