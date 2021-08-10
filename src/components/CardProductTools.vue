@@ -1,13 +1,14 @@
 <template>
   <q-card class="product-card rounded-2xl">
     <router-link to="/dashboardMobile/explore">
-      <q-card-section class="p-2">
+      <q-card-section class="p-2 flex justify-center">
         <img
-          src="~assets/Drone.jpg"
+          :src="thumbnailToolsSrc"
           class="rounded-2xl"
+          :ratio="4/3"
         >
-        <div class="font-semibold pt-2 pl-2">
-          {{ lorem }}
+        <div class="font-semibold pt-2">
+          {{ title }}
         </div>
       </q-card-section>
     </router-link>
@@ -19,11 +20,21 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'CardProductTools',
-  setup() {
-    return {
-      lorem: 'Photography Drone',
-    };
+  props: {
+    title: {
+      type: String,
+      default: 'Photography Drone',
+    },
+    thumbnailToolsSrc: {
+      type: String,
+      default: 'https://via.placeholder.com/120',
+    },
   },
+  // setup() {
+  //   return {
+  //     toolName: 'Photography Drone',
+  //   };
+  // },
 });
 </script>
 
@@ -33,7 +44,7 @@ export default defineComponent({
   // max-width: 250px !important;
 
   &__img {
-    border-radius: $generic-border-radius $generic-border-radius 0 0;
+    border-radius: $generic-border-radius $generic-border-radius 2 2;
   }
 }
 </style>

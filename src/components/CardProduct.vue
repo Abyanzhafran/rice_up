@@ -114,10 +114,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
 .product-card {
   width: 170px;
   // max-width: 250px !important;
