@@ -4,11 +4,18 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/Index.vue') }],
+    children: [
+      {
+        path: '',
+        redirect: '/welcome',
+        // component: () => import('pages/Index.vue')
+      },
+    ],
   },
   {
     path: '/welcome',
     component: () => import('pages/Welcome.vue'),
+    meta: { guard: 'no-auth' },
   },
   {
     path: '/splash',
@@ -21,12 +28,14 @@ const routes: RouteRecordRaw[] = [
       {
         path: '',
         component: () => import('pages/dashboardCourse/CourseDetail.vue'),
+        meta: { guard: 'auth' },
       },
     ],
   },
   {
     path: '/dashboardAdmin',
     component: () => import('src/layouts/DashboardLayoutAdmin.vue'),
+    meta: { guard: 'auth' },
     children: [
       {
         path: '',
@@ -49,6 +58,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/dashboardMobile',
     component: () => import('layouts/DashboardLayoutMobile.vue'),
+    meta: { guard: 'auth' },
     children: [
       {
         path: '',
