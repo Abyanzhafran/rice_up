@@ -7,7 +7,7 @@
     >
       <div>
         <h2 class="font-bold text-3xl text-gray-700 leading-normal">
-          Halo 👋
+          Halo {{ $auth.user?.displayName }} 👋
         </h2>
         <h2 class="font-bold text-3xl text-gray-700 leading-normal">
           Selamat Datang!
@@ -36,8 +36,8 @@
 </template>
 
 <script lang="ts">
-import SimpleLayout from 'layouts/SimpleLayout.vue';
 import { defineComponent } from 'vue';
+import SimpleLayout from 'layouts/SimpleLayout.vue';
 
 export default defineComponent({
   name: 'PageWelcome',

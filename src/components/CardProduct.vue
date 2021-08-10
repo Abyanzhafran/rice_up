@@ -1,7 +1,7 @@
 <template>
   <q-card
-    class="product-card shadow-1 rounded-2xl"
-    v-bind="$attrs"
+    class="product-card cursor-pointer rounded-2xl shadow-1"
+    :title="title"
     @click="open('bottom')"
   >
     <q-img
@@ -11,7 +11,7 @@
     />
 
     <q-card-section class="column items-baseline h-24">
-      <h6 class="q-mt-none q-mb-sm full-width text-body1 text-weight-regular ellipsis leading-[1.1]">
+      <h6 class="q-mt-none q-mb-sm full-width text-body1 text-weight-regular leading-[1.1] line-clamp-1">
         {{ title }}
       </h6>
 
@@ -31,6 +31,7 @@
       v-if="discountLabel"
       :label="discountLabel"
       floating
+      rounded
       class="z-index-10"
     />
 

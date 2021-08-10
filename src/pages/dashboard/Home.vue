@@ -93,7 +93,6 @@
 
       <div class="flex justify-between w-full">
         <span class="font-bold text-2xl text-left">Kelas Populer</span>
-        <div />
       </div>
 
       <div class="flex flex-col my-4">
