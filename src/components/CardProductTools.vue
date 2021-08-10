@@ -1,6 +1,6 @@
 <template>
   <q-card class="product-card rounded-2xl">
-    <router-link to="/dashboardMobile/explore">
+    <router-link to="/dashboardMobile/machinespec">
       <q-card-section class="p-2 flex justify-center">
         <img
           :src="thumbnailToolsSrc"
