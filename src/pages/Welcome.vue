@@ -24,6 +24,7 @@
           rounded
           unelevated
           class="bg-white text-gray-900 before:border before:border-blue-300"
+          @click="login"
         />
 
         <span class="text-sm text-gray-700 text-center">Belum punya akun? <router-link
@@ -37,6 +38,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { Notify } from 'quasar';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, authProvider } from 'src/firebase';
+import { getErrMsg } from 'src/uiHelpers';
 import SimpleLayout from 'layouts/SimpleLayout.vue';
 
 export default defineComponent({
@@ -45,6 +50,14 @@ export default defineComponent({
   methods: {
     pageStyle(offset: number) {
       return { height: `calc(100vh - ${offset}px)` };
+    },
+    login() {
+      this.$auth.isAwaiting = true;
+      this.$auth.afterAuthHandlerOnce.push(() => {
+        Notify.create({ type: 'positive', message: 'Berhasil masuk!' });
+      });
+      signInWithPopup(auth, authProvider)
+        .catch((err) => Notify.create({ type: 'negative', message: getErrMsg(err) }));
     },
   },
 });

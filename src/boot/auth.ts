@@ -29,7 +29,7 @@ export const authStateUtils = () => {
 
 const getRouteGuardType = (route: RouteLocationNormalizedLoaded) => route.meta.guard || 'default';
 const authFailRedirect: RouteLocationRaw = '/welcome';
-const noAuthFailRedirect: RouteLocationRaw = '/splash';
+const noAuthFailRedirect: RouteLocationRaw = '/dashboardMobile';
 
 export default boot(({
   app, router, urlPath, /* redirect, */
