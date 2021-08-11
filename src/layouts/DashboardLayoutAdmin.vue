@@ -64,14 +64,9 @@ import { ref } from 'vue';
 
 const menuList = [
   {
-    icon: 'inbox',
-    label: 'ModuleEditor',
-    link: '/dashboardAdmin',
-  },
-  {
     icon: 'send',
     label: 'ManageModules',
-    link: '/dashboardAdmin/manage_module',
+    link: '/dashboardAdmin',
   },
 ];
 

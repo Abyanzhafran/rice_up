@@ -38,11 +38,11 @@ const routes: RouteRecordRaw[] = [
     meta: { guard: 'auth' },
     children: [
       {
-        path: '',
-        component: () => import('pages/dashboardAdmin/Index.vue'),
+        path: 'module_editor',
+        component: () => import('pages/dashboardAdmin/ModuleEditor.vue'),
       },
       {
-        path: 'manage_module',
+        path: '',
         component: () => import('pages/dashboardAdmin/ManageModules.vue'),
       },
       {
