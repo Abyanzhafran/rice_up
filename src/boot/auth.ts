@@ -91,14 +91,18 @@ export default boot(({
   }, { immediate: true });
 
   router.beforeResolve((to, from, next) => {
-    const currentRouteGuard = getRouteGuardType(to);
-
-    if (currentRouteGuard === 'auth' && !authState.user) {
-      next(authFailRedirect);
-    } else if (currentRouteGuard === 'no-auth' && authState.user) {
-      next(noAuthFailRedirect);
-    } else {
+    if (authState.isAwaiting) {
       next();
+    } else {
+      const currentRouteGuard = getRouteGuardType(to);
+
+      if (currentRouteGuard === 'auth' && !authState.user) {
+        next(authFailRedirect);
+      } else if (currentRouteGuard === 'no-auth' && authState.user) {
+        next(noAuthFailRedirect);
+      } else {
+        next();
+      }
     }
   });
 });

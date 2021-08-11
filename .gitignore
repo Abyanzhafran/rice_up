@@ -40,3 +40,6 @@ ui-debug.log*
 
 # env variables
 .env
+
+# firebase additional related
+firebase-export-*
