@@ -28,7 +28,7 @@ See [Configuring quasar.conf.js](https://v2.quasar.dev/quasar-cli/quasar-conf-js
 
 ### Solar System Exploration, 1950s – 1960s (TRY List)
 
-- [ ] Mercury
+- [ ] [Mercury]
 - [x] Venus
 - [x] Earth (Orbit/Moon)
 - [x] Mars
