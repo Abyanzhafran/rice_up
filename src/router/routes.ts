@@ -8,7 +8,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: '',
         redirect: '/welcome',
-        // component: () => import('pages/Index.vue')
+        component: () => import('pages/Index.vue'),
       },
     ],
   },
@@ -50,8 +50,8 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/dashboardAdmin/ModuleShow.vue'),
       },
       {
-        path: 'orek2',
-        component: () => import('pages/dashboardAdmin/Orek2.vue'),
+        path: 'manage_module_list',
+        component: () => import('pages/dashboardAdmin/ManageModuleList.vue'),
       },
     ],
   },

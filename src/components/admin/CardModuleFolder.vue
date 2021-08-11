@@ -1,17 +1,19 @@
 <template>
   <q-card class="product-card shadow-1 rounded-xl">
-    <img src="https://cdn.quasar.dev/img/mountains.jpg">
+    <router-link to="/dashboardAdmin/manage_module_list">
+      <img src="https://cdn.quasar.dev/img/mountains.jpg">
 
-    <q-card-section class="flex items-center gap-2">
-      <q-icon
-        class="text-blue-500"
-        name="article"
-        size="sm"
-      />
-      <div class="text-md font-semibold">
-        Module Name
-      </div>
-    </q-card-section>
+      <q-card-section class="flex items-center gap-2">
+        <q-icon
+          class="text-blue-500"
+          name="article"
+          size="sm"
+        />
+        <div class="text-md font-semibold">
+          Module Name
+        </div>
+      </q-card-section>
+    </router-link>
   </q-card>
 </template>
 
