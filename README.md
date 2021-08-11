@@ -36,7 +36,7 @@ See [Configuring quasar.conf.js](https://v2.quasar.dev/quasar-cli/quasar-conf-js
   - [ ] change All tools comp to statful at (Explore page)
   - [ ] change All tools comp to statful at (Talent page)
   - [ ] change card n All comp to stateful at (Account page)
-  - change to statful all comp at (Course page)
+  - [ ] change to statful all comp at (Course page)
   - [ ] change to statful all comp at (Notification page)
   - [ ] add filter feature at (Explore page)
 2.) dashboardAdmin
