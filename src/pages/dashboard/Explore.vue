@@ -48,7 +48,7 @@
 
 <script lang="ts">
 import {
-  defineComponent, ref, reactive, toRefs,
+  defineComponent, reactive, toRefs,
 } from 'vue';
 import CardProduct from 'components/CardProduct.vue';
 
@@ -70,18 +70,17 @@ export default defineComponent({
   props: {
     options: {
       type: Array,
-      default: ['Photography Drone', 'Farmer Drone'],
+      default: () => ['Photography Drone', 'Farmer Drone'],
     },
   },
   setup() {
     const state = reactive({
       courseClasses: Array.from(Array(8), generateCourseClass),
+      model: 'All Tools',
+      text: '',
     });
 
-    // return toRefs(state);
     return {
-      model: ref('All Tools'),
-      text: ref(''),
       ...toRefs(state),
     };
   },

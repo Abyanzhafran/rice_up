@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import {
-  defineComponent, ref, reactive, toRefs,
+  defineComponent, reactive, toRefs,
 } from 'vue';
 import CardProductTools from 'src/components/CardProductTools.vue';
 
@@ -42,17 +42,17 @@ export default defineComponent({
   props: {
     options: {
       type: Array,
-      default: ['Photography Drone', 'Farmer Drone'],
+      default: () => ['Photography Drone', 'Farmer Drone'],
     },
   },
   setup() {
     const state = reactive({
       courseTools: Array.from(Array(8), generateCourseTools),
+      model: 'All Tools',
+      stars: 4,
     });
 
     return {
-      model: ref('All Tools'),
-      stars: ref(4),
       ...toRefs(state),
     };
   },
