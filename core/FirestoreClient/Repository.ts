@@ -18,8 +18,8 @@ export interface IFirestoreClientRepository<M extends Model> {
   restoreDeleted(id: string): Promise<() => Promise<M | undefined>>;
 }
 
-export interface FirestoreClientRepositoryCtor<M extends Model> {
-  new (firestore: Firestore): IFirestoreClientRepository<M>
+export interface FirestoreClientRepositoryCtor<M extends Model, PM extends Model = Model> {
+  new (firestore: Firestore | DocumentReference<PM>): IFirestoreClientRepository<M>
 }
 
 export class FirestoreClientRepository<M extends Model> implements IFirestoreClientRepository<M> {
