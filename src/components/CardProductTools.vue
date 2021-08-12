@@ -23,7 +23,7 @@ export default defineComponent({
   props: {
     title: {
       type: String,
-      default: 'Photography Drone',
+      required: true,
     },
     thumbnailToolsSrc: {
       type: String,

@@ -8,7 +8,7 @@
         <img src="https://cdn.quasar.dev/img/avatar.png">
       </q-avatar>
 
-      <span class="font-semibold text-lg pt-2">Jack Hoodward</span>
+      <span class="font-semibold text-lg pt-2">{{ studentName }}</span>
       <q-banner
         class="w-full text-dark bg-white border-2 border-gray-500 rounded-full"
       >
@@ -25,28 +25,28 @@
       >
         <q-item
           v-ripple
-          to="/dashboardMobile/course"
+          to="/dashboardCourse"
           class="border"
           clickable
         >
           <q-item-section>
             <q-item-label class="text-xl line-clamp-2">
-              Drone sebagai pengawas lahan
+              {{ classCourseTitle }}
             </q-item-label>
             <q-item-label class="font-normal">
-              Menpertani
+              {{ agencyName }}
             </q-item-label>
           </q-item-section>
           <q-item-section avatar>
             <q-circular-progress
               show-value
               size="80px"
-              :value="value"
+              :value="classCareerValue"
               :thickness="0.3"
               color="teal"
               track-color="grey-3"
             >
-              <span class="m-4 text-xl font-semibold">{{ value }}%</span>
+              <span class="m-4 text-xl font-semibold">{{ classCareerValue }}%</span>
             </q-circular-progress>
           </q-item-section>
         </q-item>
@@ -60,10 +60,28 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'Account',
-  setup() {
-    return {
-      value: 81,
-    };
+  props: {
+    studentName: {
+      type: String,
+      default: 'Just Jack',
+    },
+    classCourseTitle: {
+      type: String,
+      default: 'Drone Sebagai Pengawas Lahan',
+    },
+    agencyName: {
+      type: String,
+      default: 'Menpertani',
+    },
+    classCareerValue: {
+      type: Number,
+      default: 75,
+    },
   },
+  // setup() {
+  //   return {
+  //     value: 81,
+  //   };
+  // },
 });
 </script>

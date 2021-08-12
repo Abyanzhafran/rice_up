@@ -8,7 +8,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: '',
         redirect: '/welcome',
-        component: () => import('pages/Index.vue'),
+        // component: () => import('pages/Index.vue')
       },
     ],
   },
@@ -91,6 +91,10 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'machinespec',
         component: () => import('pages/dashboard/MachineSpec.vue'),
+      },
+      {
+        path: 'formregister',
+        component: () => import('pages/dashboard/FormTeamRegister.vue'),
       },
     ],
   },
