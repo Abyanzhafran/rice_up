@@ -97,15 +97,26 @@
 
       <div class="flex flex-col my-4">
         <div class="flex flex-row justify-center gap-x-3 gap-y-6 max-w-sm">
-          <card-product
-            v-for="el, i in courseClasses"
-            :key="i"
-            :title="el.title"
-            :trainer-name="el.trainerName"
-            :price="el.price"
-            :discount-label="el.discountLabel"
-            :discount-price="el.discountPrice"
-          />
+          <template v-if="courseClasses.length">
+            <card-product
+              v-for="el, i in courseClasses"
+              :key="i"
+              :title="el.title"
+              :trainer-name="el.trainerName"
+              :thumbnail-src="el.thumbnailSrc"
+              :price="el.price"
+              :discount-label="el.discountLabel"
+              :discount-price="el.discountPrice"
+            />
+          </template>
+
+          <span
+            v-else
+            class="text-gray-500"
+          >
+            <q-icon name="error" />
+            Tidak ada yang dapat ditampilkan
+          </span>
         </div>
       </div>
     </div>
@@ -113,8 +124,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from 'vue';
+import {
+  defineComponent, reactive, computed, toRefs,
+} from 'vue';
+import { useAsyncState } from '@vueuse/core';
 import CardProduct from 'src/components/CardProduct.vue';
+import { CourseClassUseCases } from 'core/CourseClass/UseCases';
+import { CourseClassRepository } from 'src/repositories';
 
 const slides = [
   {
@@ -131,16 +147,6 @@ const slides = [
   },
 ];
 
-const randBool = () => Math.random() > 0.5;
-
-const generateCourseClass = () => ({
-  title: 'Perluasan lahan sengketa dengan Cepat!',
-  trainerName: 'BUMN',
-  price: Math.random() * 100_000,
-  discountPrice: randBool() ? Math.random() * 100_000 : NaN,
-  discountLabel: randBool() ? '50%' : '',
-});
-
 export default defineComponent({
   components: {
     CardProduct,
@@ -150,10 +156,22 @@ export default defineComponent({
       slide: 'style',
       lorem: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
       slides,
-      courseClasses: Array.from(Array(8), generateCourseClass),
     });
+    const useCase = new CourseClassUseCases(CourseClassRepository);
+    const { state: courses } = useAsyncState(useCase.getAll(), []);
+    const courseClasses = computed(() => courses.value.map((c) => ({
+      title: c.title,
+      trainerName: c.trainer.name,
+      price: c.price,
+      thumbnailSrc: c.thumbnailSrc.value,
+      discountPrice: c.discountPrice,
+      discountLabel: c.discountLabel,
+    })));
 
-    return toRefs(state);
+    return {
+      ...toRefs(state),
+      courseClasses,
+    };
   },
 });
 </script>

@@ -2,8 +2,6 @@
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import { connectAuthEmulator, getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
-import { CourseClassFirestoreClientRepository } from 'core/CourseClass/FirestoreRepository';
-import { CourseClassUseCases } from 'core/CourseClass/UseCases';
 import firebaseJson from 'app/firebase.json';
 
 const DEFAULT_EMULATOR_HOST = 'localhost';
@@ -37,15 +35,11 @@ if (process.env.FIREBASE_USE_EMULATOR) {
   connectToEmulator();
 }
 
-const CourseClassRepository = new CourseClassFirestoreClientRepository(db);
-const CourseClassUseCase = new CourseClassUseCases(CourseClassRepository);
-
 const authProvider = new GoogleAuthProvider();
 
 export {
   app as fbApp,
   db,
   auth,
-  CourseClassUseCase,
   authProvider,
 };
