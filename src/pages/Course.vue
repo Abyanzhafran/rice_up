@@ -10,7 +10,7 @@
       />
       <span class="font-bold text-2xl text-left text-blue-700">Drone Sebagai Pengawas Lahan</span>
       <q-btn-dropdown
-        v-for="n in 2"
+        v-for="n in 1"
         :key="n"
         class="bg-white text-dark font-bold w-full rounded-xl"
         label="Fitur Drone AX470"
@@ -19,8 +19,6 @@
       >
         <q-list>
           <q-item
-            v-for="(vidName, i) in vidNames"
-            :key="i"
             v-close-popup
             clickable
           >
@@ -31,7 +29,7 @@
                   text-color="primary"
                   font-size="32px"
                 />
-                <q-item-label>{{ vidName.name }}</q-item-label>
+                <q-item-label>{{ vidName }}</q-item-label>
               </div>
               <div />
             </q-item-section>
@@ -45,21 +43,27 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-const vidNames = [
-  {
-    name: 'Set up Drone',
-  },
-  {
-    name: 'Start Fly',
-  },
-];
+// const vidNames = [
+//   {
+//     name: 'Set up Drone',
+//   },
+//   {
+//     name: 'Start Fly',
+//   },
+// ];
 
 export default defineComponent({
   name: 'Course',
-  setup() {
-    return {
-      vidNames,
-    };
+  props: {
+    vidName: {
+      type: String,
+      default: 'Set up Drone',
+    },
   },
+  // setup() {
+  //   return {
+  //     vidNames,
+  //   };
+  // },
 });
 </script>

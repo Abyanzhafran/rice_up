@@ -13,9 +13,10 @@
       <div class="flex flex-col my-4">
         <div class="flex flex-row justify-center gap-x-3 gap-y-6 max-w-sm">
           <card-product-tools
-            v-for="n in 8"
+            v-for="(el, n) in courseTools"
             :key="n"
             v-ripple
+            :title="el.title"
           />
         </div>
       </div>
@@ -24,19 +25,35 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import {
+  defineComponent, ref, reactive, toRefs,
+} from 'vue';
 import CardProductTools from 'src/components/CardProductTools.vue';
+
+const generateCourseTools = () => ({
+  title: 'Photography Drone',
+});
 
 export default defineComponent({
   name: 'Talent',
   components: {
     CardProductTools,
   },
+  props: {
+    options: {
+      type: Array,
+      default: ['Photography Drone', 'Farmer Drone'],
+    },
+  },
   setup() {
+    const state = reactive({
+      courseTools: Array.from(Array(8), generateCourseTools),
+    });
+
     return {
       model: ref('All Tools'),
       stars: ref(4),
-      options: ['Photography Drone', 'Farmer Drone', 'Automatic Tractor', 'Automatic Sprinkler'],
+      ...toRefs(state),
     };
   },
 });

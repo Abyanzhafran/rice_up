@@ -37,11 +37,11 @@
             </q-avatar>
           </q-item-section>
           <q-item-section>
-            <q-item-label caption>
-              Title
-            </q-item-label>
             <q-item-label lines="1">
-              Short Description
+              {{ notifTitle }}
+            </q-item-label>
+            <q-item-label caption>
+              {{ notifDate }}
             </q-item-label>
           </q-item-section>
           <q-item-section side>
@@ -64,6 +64,16 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'Notification',
+  props: {
+    notifTitle: {
+      type: String,
+      default: 'Yuk, lihat berbagai macam kelas kursus yang ada',
+    },
+    notifDate: {
+      type: Date,
+      default: '11/10/2016, 11:49:36 AM',
+    },
+  },
   // setup() {
 
   // },

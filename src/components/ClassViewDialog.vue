@@ -11,17 +11,17 @@
               class="rounded-2xl w-full h-48"
               src="https://www.youtube.com/embed/OhESSZIXvCA"
             />
-            <span class="font-bold text-2xl text-blue-700">Drone Sebagai Pengawas Lahan</span>
+            <span class="font-bold text-2xl text-blue-700">{{ classCourseTitle }}</span>
             <div class="flex flex-row gap-2 text-lg">
               <span class="font-bold">
-                Rp 123.321
+                {{ formatCurrency(price) }}
               </span>
-              <span
-                class="done"
-                style="font-size: 14px"
+              <small
+                v-if="discountPrice"
+                class="text-strike"
               >
-                Rp 180.000
-              </span>
+                {{ formatCurrency(discountPrice) }}
+              </small>
             </div>
             <div class="flex flex-row items-center gap-2">
               <q-icon
@@ -29,12 +29,12 @@
                 class="text-green-500"
                 size="sm"
               />
-              <span class="font-bold">Menpertani</span>
+              <span class="font-bold">{{ agencyName }}</span>
               <q-separator
                 class="bg-dark"
                 vertical
               />
-              <span>Instansi Negara</span>
+              <span>{{ agencyName }}</span>
             </div>
             <q-toolbar class="flex flex-row bg-gray-200 shadow-2">
               <div class="flex items-center gap-1">
@@ -44,7 +44,7 @@
                   size="sm"
                 />
                 <span class="font-bold">
-                  8.6
+                  {{ rating }}
                 </span>
               </div>
 
@@ -62,7 +62,7 @@
                   size="sm"
                 />
                 <span class="font-bold">
-                  2000
+                  {{ totalStudents }}
                 </span>
               </div>
 
@@ -80,7 +80,7 @@
                   size="sm"
                 />
                 <span class="font-bold">
-                  Semua
+                  {{ studentsType }}
                 </span>
               </div>
             </q-toolbar>
@@ -92,14 +92,17 @@
               <div class="flex items-center justify-start py-2">
                 <div class="flex flex-col">
                   <span class="font-semibold pt-1 pb-2">Persyaratan :</span>
-                  <span
-                    v-for="n in 5"
+                  <ul
+                    v-for="n in 4"
                     :key="n"
+                    class="list-disc ml-4"
                   >
-                    - Bertempat tinggal di....
-                  </span>
-                  <span class="font-semibold py-2">Deskripsi</span>
-                  <span>Lorem Ipsum Dolor Sit Amet</span>
+                    <li>
+                      {{ classRequirement }}
+                    </li>
+                  </ul>
+                  <span class="font-semibold mb-2 mt-4">Deskripsi</span>
+                  <span>{{ classDescription }}</span>
                 </div>
               </div>
             </q-banner>
@@ -119,8 +122,57 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
+const formatCurrency = (n: number) => n.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
+
 export default defineComponent({
   name: 'ClassViewDialog',
+  props: {
+    classCourseTitle: {
+      type: String,
+      default: 'Drone Sebagai Pengawas Lahan',
+    },
+    agencyName: {
+      type: String,
+      default: 'Menpertani',
+    },
+    agencyType: {
+      type: String,
+      default: 'Instansi Negara',
+    },
+    rating: {
+      type: Number,
+      default: 8.6,
+    },
+    totalStudents: {
+      type: Number,
+      default: 2000,
+    },
+    studentsType: {
+      type: String,
+      default: 'Umum',
+    },
+    classRequirement: {
+      type: String,
+      default: 'Bertempat tinggal di Solo-Jogja',
+    },
+    classDescription: {
+      type: String,
+      default: 'Kelas ini mempelajari pengawasan lahan menggunakan teknologi drone',
+    },
+    price: {
+      type: Number,
+      default: NaN,
+    },
+    discountPrice: {
+      type: Number,
+      default: NaN,
+    },
+  },
+  setup() {
+    return {
+      formatCurrency,
+    };
+  },
 });
 </script>
 

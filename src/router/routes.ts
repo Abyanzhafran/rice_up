@@ -103,6 +103,10 @@ const routes: RouteRecordRaw[] = [
         path: 'module/list',
         component: () => import('pages/dashboardAdmin/ManageModuleList.vue'),
       },
+      {
+        path: 'formregister',
+        component: () => import('pages/dashboard/FormTeamRegister.vue'),
+      },
     ],
   },
   // Always leave this as last one,
