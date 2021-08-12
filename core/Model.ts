@@ -35,9 +35,9 @@ export namespace DataType {
     | Timestamp
     | File
     | Ref;
-  export type PossibleType = PossibleValue
-    | List
-    | Dict;
+  export type PossibleType<TL = PossibleValue, TD = PossibleValue> = PossibleValue
+    | List<TL>
+    | Dict<TD>;
   // Shared DataType
   export type Money = {
     currency: DataType.String;
@@ -46,7 +46,7 @@ export namespace DataType {
 }
 
 export interface Model {
-  [k: string]: DataType.PossibleType;
+  [k: string]: DataType.PossibleType<unknown, unknown>;
   _uid: DataType.String;
   _created: DataType.Timestamp;
   _updated: DataType.Timestamp;
