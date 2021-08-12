@@ -20,7 +20,8 @@ export namespace DataType {
     value: Blob;
   }
   export type File = FileUrl | FileBlob;
-  export type Ref = {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  export type Ref<T extends Dict = {}> = T & {
     type: 'Ref',
     value: string;
   }
