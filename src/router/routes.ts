@@ -1,5 +1,7 @@
 import { RouteRecordRaw } from 'vue-router';
 
+const slugRegex = '[a-z0-9-]+';
+
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -8,72 +10,33 @@ const routes: RouteRecordRaw[] = [
       {
         path: '',
         redirect: '/welcome',
-        component: () => import('pages/Index.vue'),
+      },
+      {
+        path: '/welcome',
+        name: 'Welcome',
+        component: () => import('pages/Welcome.vue'),
+        meta: { guard: 'no-auth' },
+      },
+      {
+        path: '/splash',
+        name: 'SplashScreen',
+        component: () => import('pages/SplashScreen.vue'),
       },
     ],
   },
   {
-    path: '/welcome',
-    component: () => import('pages/Welcome.vue'),
-    meta: { guard: 'no-auth' },
-  },
-  {
-    path: '/splash',
-    component: () => import('pages/SplashScreen.vue'),
-  },
-  {
-    path: '/dashboardCourse',
-    component: () => import('src/layouts/DashboardLayoutCourse.vue'),
-    children: [
-      {
-        path: '',
-        component: () => import('pages/dashboardCourse/CourseDetail.vue'),
-        meta: { guard: 'auth' },
-      },
-    ],
-  },
-  {
-    path: '/dashboardAdmin',
-    component: () => import('src/layouts/DashboardLayoutAdmin.vue'),
-    meta: { guard: 'auth' },
-    children: [
-      {
-        path: 'module_editor',
-        component: () => import('pages/dashboardAdmin/ModuleEditor.vue'),
-      },
-      {
-        path: '',
-        component: () => import('pages/dashboardAdmin/ManageModules.vue'),
-      },
-      {
-        path: 'module_show',
-        component: () => import('pages/dashboardAdmin/ModuleShow.vue'),
-      },
-      {
-        path: 'manage_module_list',
-        component: () => import('pages/dashboardAdmin/ManageModuleList.vue'),
-      },
-    ],
-  },
-  {
-    path: '/dashboardMobile',
+    path: '/app',
     component: () => import('layouts/DashboardLayoutMobile.vue'),
     meta: { guard: 'auth' },
     children: [
       {
         path: '',
+        name: 'AppHome',
         component: () => import('pages/dashboard/Home.vue'),
       },
       {
-        path: 'account',
-        component: () => import('pages/dashboard/Account.vue'),
-      },
-      {
-        path: 'talent',
-        component: () => import('pages/dashboard/Talent.vue'),
-      },
-      {
         path: 'explore',
+        name: 'AppExplore',
         component: () => import('pages/dashboard/Explore.vue'),
       },
       {
@@ -82,15 +45,63 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: 'notification',
+        name: 'AppNotification',
         component: () => import('pages/dashboard/Notification.vue'),
       },
       {
-        path: 'setting',
-        component: () => import('pages/dashboard/Setting.vue'),
+        path: 'stuff',
+        name: 'AppStuff',
+        component: () => import('pages/dashboard/Talent.vue'),
       },
       {
-        path: 'machinespec',
+        path: 'stuff/:stuffId',
+        name: 'AppStuffDetail',
         component: () => import('pages/dashboard/MachineSpec.vue'),
+      },
+      {
+        path: 'account',
+        name: 'AppAccount',
+        component: () => import('pages/dashboard/Account.vue'),
+      },
+      {
+        path: 'setting',
+        name: 'AppSettings',
+        component: () => import('pages/dashboard/Setting.vue'),
+      },
+    ],
+  },
+  {
+    path: '/app',
+    component: () => import('src/layouts/DashboardLayoutCourse.vue'),
+    meta: { guard: 'auth' },
+    children: [
+      {
+        path: `:courseSlug(${slugRegex})`,
+        name: 'Course',
+        component: () => import('pages/dashboardCourse/CourseDetail.vue'),
+      },
+    ],
+  },
+  {
+    path: '/admin',
+    component: () => import('src/layouts/DashboardLayoutAdmin.vue'),
+    meta: { guard: 'auth' },
+    children: [
+      {
+        path: '',
+        component: () => import('pages/dashboardAdmin/ManageModules.vue'),
+      },
+      {
+        path: 'module/edit',
+        component: () => import('pages/dashboardAdmin/ModuleEditor.vue'),
+      },
+      {
+        path: 'module/show',
+        component: () => import('pages/dashboardAdmin/ModuleShow.vue'),
+      },
+      {
+        path: 'module/list',
+        component: () => import('pages/dashboardAdmin/ManageModuleList.vue'),
       },
     ],
   },

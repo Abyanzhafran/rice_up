@@ -45,28 +45,28 @@
           label="Home"
           name="home"
           icon="home"
-          to="/dashboardMobile"
+          :to="{name: 'AppHome'}"
           exact
         />
         <q-route-tab
           label="Explorasi"
           name="explorasi"
           icon="explore"
-          to="/dashboardMobile/explore"
+          :to="{name: 'AppExplore'}"
           exact
         />
         <q-route-tab
-          label="Talenta"
-          name="talenta"
+          label="Alat"
+          name="alat"
           icon="grid_view"
-          to="/dashboardMobile/talent"
+          :to="{name: 'AppStuff'}"
           exact
         />
         <q-route-tab
           label="Akun"
           name="akun"
           icon="person"
-          to="/dashboardMobile/account"
+          :to="{name: 'AppAccount'}"
           exact
         />
       </q-tabs>
