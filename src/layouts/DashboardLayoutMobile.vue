@@ -4,7 +4,7 @@
       <q-toolbar class="flex justify-between bg-white px-6 py-4">
         <q-btn
           class="rounded-lg"
-          to="/dashboardMobile/notification"
+          :to="{name: 'AppNotification'}"
           padding="sm"
           outline
           icon="notifications"
@@ -15,7 +15,7 @@
 
         <q-btn
           class="rounded-lg"
-          to="/dashboardMobile/setting"
+          :to="{name: 'AppSettings'}"
           padding="sm"
           outline
           icon="settings"

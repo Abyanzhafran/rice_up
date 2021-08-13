@@ -10,6 +10,8 @@ type authStateHandler = () => void;
 export const useAuthState = createGlobalState(() => ({
   user: auth.currentUser,
   isAwaiting: true,
+  nextAuthRedirect: null as RouteLocationRaw | null,
+  nextUnauthRedirect: null as RouteLocationRaw | null,
   afterAuthHandlerOnce: [] as authStateHandler[],
   afterUnauthHandlerOnce: [] as authStateHandler[],
 }));
@@ -28,8 +30,8 @@ export const authStateUtils = () => {
 };
 
 const getRouteGuardType = (route: RouteLocationNormalizedLoaded) => route.meta.guard || 'default';
-const authFailRedirect: RouteLocationRaw = '/welcome';
-const noAuthFailRedirect: RouteLocationRaw = '/dashboardMobile';
+const authFailRedirect: RouteLocationRaw = { name: 'Welcome' };
+const noAuthFailRedirect: RouteLocationRaw = { name: 'AppHome' };
 
 export default boot(({
   app, router, urlPath, /* redirect, */
@@ -43,11 +45,13 @@ export default boot(({
   const onAfterAuthenticated = () => {
     authState.afterAuthHandlerOnce.forEach((handler) => handler());
     authState.afterAuthHandlerOnce = [];
+    authState.nextAuthRedirect = null;
   };
 
   const onAfterUnauthenticated = () => {
     authState.afterUnauthHandlerOnce.forEach((handler) => handler());
     authState.afterUnauthHandlerOnce = [];
+    authState.nextUnauthRedirect = null;
   };
 
   auth
@@ -70,7 +74,7 @@ export default boot(({
       const currentRouteGuard = getRouteGuardType(getCurrentRoute(isFirstLoad));
 
       if (currentRouteGuard === 'auth' && !user) {
-        void router.push(authFailRedirect);
+        void router.push(authState.nextAuthRedirect || authFailRedirect);
       }
       if (currentRouteGuard === 'no-auth' && user) {
         void router.push(noAuthFailRedirect);
@@ -97,7 +101,7 @@ export default boot(({
       const currentRouteGuard = getRouteGuardType(to);
 
       if (currentRouteGuard === 'auth' && !authState.user) {
-        next(authFailRedirect);
+        next(authState.nextAuthRedirect || authFailRedirect);
       } else if (currentRouteGuard === 'no-auth' && authState.user) {
         next(noAuthFailRedirect);
       } else {

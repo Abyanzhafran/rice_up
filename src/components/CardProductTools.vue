@@ -1,6 +1,6 @@
 <template>
   <q-card class="product-card rounded-2xl">
-    <router-link to="/dashboardMobile/machinespec">
+    <router-link :to="{name: 'AppStuffDetail', params: {stuffId: 'asdads'}}">
       <q-card-section class="p-2 flex justify-center">
         <img
           :src="thumbnailToolsSrc"
@@ -27,14 +27,9 @@ export default defineComponent({
     },
     thumbnailToolsSrc: {
       type: String,
-      default: 'https://via.placeholder.com/120',
+      default: 'https://via.placeholder.com/100',
     },
   },
-  // setup() {
-  //   return {
-  //     toolName: 'Photography Drone',
-  //   };
-  // },
 });
 </script>
 
