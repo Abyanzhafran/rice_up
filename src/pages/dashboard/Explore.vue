@@ -33,9 +33,9 @@
 
       <div class="flex flex-col my-4">
         <div class="flex flex-row justify-center gap-x-3 gap-y-6 max-w-sm">
-          <template v-if="courseClasses.length">
+          <template v-if="courseClassesDum.length">
             <card-product
-              v-for="el, i in courseClasses"
+              v-for="el, i in courseClassesDum"
               :key="i"
               :title="el.title"
               :trainer-name="el.trainerName"
@@ -67,13 +67,28 @@ import { useAsyncState } from '@vueuse/core';
 import { CourseClassUseCases } from 'core/CourseClass/UseCases';
 import { CourseClassRepository } from 'src/repositories';
 
+// Dummy Var
+const randBool = () => Math.random() > 0.5;
+
+const generateCourseClass = () => ({
+  title: 'Perluasan lahan sengketa dengan Cepat!',
+  trainerName: 'BUMN',
+  price: Math.random() * 100_000,
+  discountPrice: randBool() ? Math.random() * 100_000 : NaN,
+  discountLabel: randBool() ? '50%' : '',
+});
+// End Dummy
+
 export default defineComponent({
-  name: 'Explore',
+  name: 'AppExplore',
   components: {
     CardProduct,
   },
   setup() {
     const state = reactive({
+      // Dummy data
+      courseClassesDum: Array.from(Array(8), generateCourseClass),
+      // End Dummy
       search: '',
       selectedCategory: 'All Tools',
       options: ['Photography Drone', 'Farmer Drone'],
