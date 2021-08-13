@@ -22,7 +22,7 @@
           class="flex flex-col flex-nowrap"
         >
           <q-card
-            class="rounded-2xl"
+            class="rounded-2xl p-2 bg-red-500 w-full"
             flat
             bordered
           >
@@ -30,13 +30,33 @@
               horizontal
               class="h-32"
             >
-              <q-card-section class="flex items-center">
-                {{ lorem }}
+              <q-card-section class="flex items-center w-80">
+                <div class="flex flex-col gap-2">
+                  <div class="flex gap-1 items-center">
+                    <span class="text-white font-semibold">Lebih Murah</span>
+                    <q-icon
+                      name="local_offer"
+                      class="text-yellow-300"
+                      size="xs"
+                    />
+                  </div>
+                  <span class="uppercase text-2xl text-white font-bold">flash sale!</span>
+                  <div>
+                    <q-badge
+                      rounded
+                      color="yellow-8"
+                    >
+                      <span class="font-bold">
+                        2.2.21
+                      </span>
+                    </q-badge>
+                  </div>
+                </div>
               </q-card-section>
 
               <q-img
-                class="col-5"
-                src="https://cdn.quasar.dev/img/parallax2.jpg"
+                class="col-5 rounded-xl"
+                src="~assets/Stationary.jpg"
               />
             </q-card-section>
           </q-card>
@@ -97,13 +117,12 @@
 
       <div class="flex flex-col my-4">
         <div class="flex flex-row justify-center gap-x-3 gap-y-6 max-w-sm">
-          <template v-if="courseClasses.length">
+          <template v-if="courseClassesDum.length">
             <card-product
-              v-for="el, i in courseClasses"
+              v-for="el, i in courseClassesDum"
               :key="i"
               :title="el.title"
               :trainer-name="el.trainerName"
-              :thumbnail-src="el.thumbnailSrc"
               :price="el.price"
               :discount-label="el.discountLabel"
               :discount-price="el.discountPrice"
@@ -147,14 +166,29 @@ const slides = [
   },
 ];
 
+// Dummy Var
+const randBool = () => Math.random() > 0.5;
+
+const generateCourseClass = () => ({
+  title: 'Perluasan lahan sengketa dengan Cepat!',
+  trainerName: 'BUMN',
+  price: Math.random() * 100_000,
+  discountPrice: randBool() ? Math.random() * 100_000 : NaN,
+  discountLabel: randBool() ? '50%' : '',
+});
+// End Dummy
+
 export default defineComponent({
   components: {
     CardProduct,
   },
   setup() {
     const state = reactive({
+      // Dummy data
+      courseClassesDum: Array.from(Array(8), generateCourseClass),
+      // End Dummy
       slide: 'style',
-      lorem: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
+      lorem: 'Beli Kelas Lebih Murah',
       slides,
     });
     const useCase = new CourseClassUseCases(CourseClassRepository);

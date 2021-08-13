@@ -10,8 +10,8 @@
       :ratio="4/3"
     />
 
-    <q-card-section class="column items-baseline h-24">
-      <h6 class="q-mt-none q-mb-sm full-width text-body1 text-weight-regular leading-[1.1] line-clamp-1">
+    <q-card-section class="column items-baseline h-28">
+      <h6 class="mt-0 mb-2 full-width text-base font-semibold leading-[1.1] line-clamp-2">
         {{ title }}
       </h6>
 
@@ -22,7 +22,7 @@
         {{ formatCurrency(discountPrice) }}
       </small>
 
-      <span class="text-body2 text-weight-medium">
+      <span class="text-sm font-medium">
         {{ formatCurrency(price) }}
       </span>
     </q-card-section>
