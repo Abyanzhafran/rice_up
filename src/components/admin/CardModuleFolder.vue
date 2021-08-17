@@ -1,6 +1,6 @@
 <template>
   <q-card class="product-card shadow-1 rounded-xl">
-    <router-link to="/dashboardAdmin/manage_module_list">
+    <router-link to="/admin/module/list">
       <img src="https://cdn.quasar.dev/img/mountains.jpg">
 
       <q-card-section class="flex items-center gap-2">

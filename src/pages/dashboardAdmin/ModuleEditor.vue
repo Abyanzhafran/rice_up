@@ -7,7 +7,7 @@
       <div class="flex justify-between">
         <span class="font-bold text-2xl">Module Editor</span>
         <q-btn
-          to="/dashboardAdmin/manage_module_list"
+          to="/admin/module/list"
           class="text-blue-600 font-bold bg-white"
           round
           icon="arrow_back"

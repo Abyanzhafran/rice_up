@@ -7,7 +7,7 @@
       <div class="flex justify-between">
         <span class="font-bold text-2xl">Manage List</span>
         <q-btn
-          to="/dashboardAdmin"
+          to="/admin"
           class="text-blue-600 font-bold bg-white"
           round
           icon="arrow_back"
@@ -28,7 +28,7 @@
             <q-avatar :icon="moduleIcon" />
           </q-item-section>
           <q-item-section>
-            <router-link to="/dashboardAdmin/module_editor">
+            <router-link to="/admin/module/edit">
               <q-item-label lines="1">
                 {{ moduleLabel }}
               </q-item-label>
