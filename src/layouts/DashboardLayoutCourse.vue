@@ -12,7 +12,7 @@
           icon="menu"
           @click="drawer = !drawer"
         />
-        <q-toolbar-title>Header</q-toolbar-title>
+        <q-toolbar-title>Drone Basic Untuk Pertanian</q-toolbar-title>
       </q-toolbar>
     </q-header>
 
@@ -39,7 +39,7 @@
               <q-card>
                 <q-card-section class="flex flex-col font-normal">
                   <span
-                    v-for="n in 3"
+                    v-for="n in 1"
                     :key="n"
                   >
                     Apa itu Drone ?
@@ -86,16 +86,16 @@ const menuList = [
     label: 'Inbox',
     separator: true,
   },
-  {
-    icon: 'send',
-    label: 'Outbox',
-    separator: false,
-  },
-  {
-    icon: 'delete',
-    label: 'Trash',
-    separator: false,
-  },
+  // {
+  //   icon: 'send',
+  //   label: 'Outbox',
+  //   separator: false,
+  // },
+  // {
+  //   icon: 'delete',
+  //   label: 'Trash',
+  //   separator: false,
+  // },
 ];
 
 export default {

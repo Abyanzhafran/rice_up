@@ -34,22 +34,25 @@
             class="h-full"
             name="module"
           >
-            <span class="font-bold text-2xl my-2">Apa itu Drone ?</span>
-            <p>
-              Drone adalah...Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem
-            </p>
-            <span class="font-bold text-2xl py-2">
-              Informasi
-            </span>
-            <p>Khusus regional Solo-Jogja</p>
+            <div class="flex gap-4">
+              <div>
+                <span class="font-bold text-2xl my-2">Apa itu Drone ?</span>
+                <p>
+                  <!-- eslint-disable-next-line max-len -->
+                  Drone adalah salah satu gadget yang tengah digandrungi kaum milenial dari berbagai latar belakang. Banyak kawula muda yang senang bermain drone. Namun, bagi beberapa orang lainnya drone adalah sebuah alat yang mungkin masih terdengar asing.
+                </p>
+              </div>
+            </div>
           </q-tab-panel>
 
           <q-tab-panel name="video">
-            <span class="font-bold text-2xl py-2">Bagaimana drone beroprasi ?</span>
-            <q-video
-              class="rounded-2xl w-full h-48"
-              src="https://www.youtube.com/embed/IuV0wQckAps"
-            />
+            <div class="flex gap-4">
+              <span class="font-bold text-2xl py-2">Bagaimana cara kerja drone ?</span>
+              <q-video
+                class="rounded-2xl w-full h-48"
+                src="https://www.youtube.com/embed/3MamA5ru8L8"
+              />
+            </div>
           </q-tab-panel>
 
           <q-tab-panel name="movies">
@@ -68,6 +71,7 @@
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
+  name: 'CourseDetail',
   setup() {
     return {
       tab: ref('module'),

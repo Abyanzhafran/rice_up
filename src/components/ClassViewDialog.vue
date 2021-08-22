@@ -13,7 +13,7 @@
             <div class="flex flex-col justify-start w-full gap-4 px-auto">
               <q-video
                 class="rounded-2xl w-full h-48"
-                src="https://www.youtube.com/embed/OhESSZIXvCA"
+                src="https://www.youtube.com/embed/nmXm5LHA8uE"
               />
               <span class="font-bold text-2xl text-blue-700">{{ classCourseTitle }}</span>
               <div class="flex flex-row gap-2 text-lg">
@@ -134,7 +134,7 @@ export default defineComponent({
   props: {
     classCourseTitle: {
       type: String,
-      default: 'Drone Sebagai Pengawas Lahan',
+      default: 'Drone Basic Untuk Pertanian',
     },
     agencyName: {
       type: String,
