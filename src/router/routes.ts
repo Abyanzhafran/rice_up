@@ -40,10 +40,6 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/dashboard/Explore.vue'),
       },
       {
-        path: 'course',
-        component: () => import('pages/Course.vue'),
-      },
-      {
         path: 'notification',
         name: 'AppNotification',
         component: () => import('pages/dashboard/Notification.vue'),
@@ -77,7 +73,7 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: `:courseSlug(${slugRegex})`,
-        name: 'Course',
+        name: 'CourseDetail',
         component: () => import('pages/dashboardCourse/CourseDetail.vue'),
       },
     ],
