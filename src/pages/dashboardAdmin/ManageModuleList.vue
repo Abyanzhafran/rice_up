@@ -17,44 +17,65 @@
         class="w-full bg-white"
         bordered
       >
-        <q-item
-          v-for="n in 3"
-          :key="n"
-          v-ripple
-          class="border"
-          clickable
-        >
-          <q-item-section avatar>
-            <q-avatar :icon="moduleIcon" />
-          </q-item-section>
-          <q-item-section>
-            <router-link to="/admin/module/edit">
-              <q-item-label lines="1">
-                {{ moduleLabel }}
-              </q-item-label>
+        <template v-if="modulesListDump.length">
+          <q-item
+            v-for="el, i in modulesListDump"
+            :key="i"
+            v-ripple
+            :module-icon="moduleIcon"
+            :module-label="moduleLabel"
+            :module-caption="moduleCaption"
+            :chap-icon="chapIcon"
+            :chap-label="chapLabel"
+            :chap-caption="chapCaption"
+            :chap-review="chapReview"
+            class="border"
+            clickable
+          >
+            <q-item-section avatar>
+              <q-avatar :icon="moduleIcon" />
+            </q-item-section>
+            <q-item-section>
+              <router-link to="/admin/module/edit">
+                <q-item-label lines="1">
+                  {{ moduleLabel }}
+                </q-item-label>
+                <q-item-label caption>
+                  {{ moduleCaption }}
+                </q-item-label>
+              </router-link>
+            </q-item-section>
+            <q-item-section side>
               <q-item-label caption>
-                {{ moduleCaption }}
+                <q-icon
+                  name="info"
+                  color="green"
+                  size="xs"
+                />
               </q-item-label>
-            </router-link>
-          </q-item-section>
-          <q-item-section side>
-            <q-item-label caption>
-              <q-icon
-                name="info"
-                color="green"
-                size="xs"
-              />
-            </q-item-label>
-          </q-item-section>
-        </q-item>
+            </q-item-section>
+          </q-item>
+        </template>
       </q-list>
     </div>
   </q-page>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { toRefs } from '@vueuse/core';
+import { defineComponent, reactive } from 'vue';
 
+// Dump data
+const generateModuleList = () => ({
+  moduleIcon: 'mail',
+  moduleLabel: 'Modul Teknologi Agraria',
+  moduleCaption: 'Pengenalan Teknologi Drone',
+  chapIcon: 'description',
+  chapLabel: 'Bab 1',
+  ChapLabel: 'Pengenalan Drone',
+  ChapReview: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid',
+});
+// End dump
 export default defineComponent({
   name: 'ManageModuleList',
   props: {
@@ -90,11 +111,17 @@ export default defineComponent({
       default: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid',
     },
   },
-  // setup() {
-  //   return {
+  setup() {
+    // Dump data
+    const state = reactive({
+      modulesListDump: Array.from(Array(4), generateModuleList),
+    });
+    // End Dump
 
-  //   };
-  // },
+    return {
+      ...toRefs(state),
+    };
+  },
 });
 </script>
 

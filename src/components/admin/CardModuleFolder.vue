@@ -1,16 +1,16 @@
 <template>
   <q-card class="product-card shadow-1 rounded-xl">
     <router-link to="/admin/module/list">
-      <img src="https://cdn.quasar.dev/img/mountains.jpg">
+      <img :src="image">
 
       <q-card-section class="flex items-center gap-2">
         <q-icon
           class="text-blue-500"
-          name="article"
+          :name="icon"
           size="sm"
         />
         <div class="text-md font-semibold">
-          Module Name
+          {{ moduleName }}
         </div>
       </q-card-section>
     </router-link>
@@ -22,6 +22,20 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'CardModuleFolder',
+  props: {
+    moduleName: {
+      type: String,
+      default: '',
+    },
+    icon: {
+      type: String,
+      default: '',
+    },
+    image: {
+      type: String,
+      default: '',
+    },
+  },
   // setup() {
 
   // },

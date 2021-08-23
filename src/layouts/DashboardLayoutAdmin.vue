@@ -64,9 +64,14 @@ import { ref } from 'vue';
 
 const menuList = [
   {
-    icon: 'send',
-    label: 'ManageModules',
+    icon: 'library_books',
+    label: 'Manage Modules',
     link: '/dashboardAdmin',
+  },
+  {
+    icon: 'class',
+    label: 'Manage Course',
+    link: '/admin/manage_course',
   },
 ];
 

@@ -103,6 +103,10 @@ const routes: RouteRecordRaw[] = [
         path: 'formregister',
         component: () => import('pages/dashboard/FormTeamRegister.vue'),
       },
+      {
+        path: 'manage_course',
+        component: () => import('pages/dashboardAdmin/ManageCourse.vue'),
+      },
     ],
   },
   // Always leave this as last one,
