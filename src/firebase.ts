@@ -14,6 +14,8 @@ const auth = getAuth(app);
 
 const connectToEmulator = (() => {
   const connect = () => {
+    console.log('connecting to emulator...');
+
     try {
       connectFirestoreEmulator(db, DEFAULT_EMULATOR_HOST, firebaseJson.emulators.firestore.port);
       connectAuthEmulator(auth, `http://${DEFAULT_EMULATOR_HOST}:${firebaseJson.emulators.auth.port}`);
@@ -31,7 +33,8 @@ const connectToEmulator = (() => {
   };
 })();
 
-if (process.env.FIREBASE_USE_EMULATOR) {
+// due to quasar default, everything calling env will be converted string then if inside if() will be converted to boolean
+if (JSON.parse(process.env.FIREBASE_USE_EMULATOR as unknown as string)) {
   connectToEmulator();
 }
 

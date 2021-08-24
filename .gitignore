@@ -43,3 +43,4 @@ ui-debug.log*
 
 # firebase additional related
 firebase-export-*
+.firebase
