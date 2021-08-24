@@ -30,6 +30,7 @@
           v-ripple
           class="border"
           clickable
+          to="/app/invite_notif"
         >
           <q-item-section avatar>
             <q-avatar>

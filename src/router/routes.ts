@@ -45,6 +45,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/dashboard/Notification.vue'),
       },
       {
+        path: 'invite_notif',
+        name: 'AppInviteNotification',
+        component: () => import('pages/dashboard/InvitationNotif.vue'),
+      },
+      {
         path: 'stuff',
         name: 'AppStuff',
         component: () => import('pages/dashboard/Talent.vue'),
