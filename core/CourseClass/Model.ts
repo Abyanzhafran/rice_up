@@ -3,7 +3,6 @@ import type { DataType, Model } from 'core/Model';
 export interface CourseClass extends Model {
   title: DataType.String;
   thumbnailSrc: DataType.File;
-  thumbnailsSrc: DataType.List<DataType.File>;
   rating: DataType.Number;
   ratingCount: DataType.Number;
   participantNumb: DataType.Number;
@@ -11,6 +10,10 @@ export interface CourseClass extends Model {
     name: DataType.String;
   }>;
   price: DataType.Money;
+  headerMediaSrc: {
+    _type: 'YoutubeEmbed';
+    value: DataType.String;
+  } | DataType.File;
   aboutContent: DataType.String;
   /** unique, used as alternative of id */
   slug: DataType.String;
