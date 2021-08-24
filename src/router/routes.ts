@@ -15,7 +15,7 @@ const routes: RouteRecordRaw[] = [
         path: '/welcome',
         name: 'Welcome',
         component: () => import('pages/Welcome.vue'),
-        // meta: { guard: 'no-auth' },
+        meta: { guard: 'no-auth' },
       },
       {
         path: '/splash',
@@ -27,7 +27,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/app',
     component: () => import('layouts/DashboardLayoutMobile.vue'),
-    // meta: { guard: 'auth' },
+    meta: { guard: 'auth' },
     children: [
       {
         path: '',
@@ -69,7 +69,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/app',
     component: () => import('src/layouts/DashboardLayoutCourse.vue'),
-    // meta: { guard: 'auth' },
+    meta: { guard: 'auth' },
     children: [
       {
         path: `:courseSlug(${slugRegex})`,
@@ -81,7 +81,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/admin',
     component: () => import('src/layouts/DashboardLayoutAdmin.vue'),
-    // meta: { guard: 'auth' },
+    meta: { guard: 'auth' },
     children: [
       {
         path: '',
