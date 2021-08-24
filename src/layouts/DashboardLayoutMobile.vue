@@ -11,7 +11,7 @@
           color="amber"
         />
 
-        <span class="font-bold text-lg text-dark pt-2">Jack Hoodward</span>
+        <span class="font-bold text-lg text-dark pt-2">{{ String($auth.user?.displayName) }}</span>
 
         <q-btn
           class="rounded-lg"

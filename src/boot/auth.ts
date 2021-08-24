@@ -1,20 +1,10 @@
 import { watch } from 'vue';
 import { Loading } from 'quasar';
 import { boot } from 'quasar/wrappers';
-import { createGlobalState } from '@vueuse/core';
 import { auth } from 'src/firebase';
+import { useAuthState } from 'src/use/AuthState';
 import type { RouteLocationRaw, RouteLocationNormalizedLoaded } from 'vue-router';
-
-type authStateHandler = () => void;
-
-export const useAuthState = createGlobalState(() => ({
-  user: auth.currentUser,
-  isAwaiting: true,
-  nextAuthRedirect: null as RouteLocationRaw | null,
-  nextUnauthRedirect: null as RouteLocationRaw | null,
-  afterAuthHandlerOnce: [] as authStateHandler[],
-  afterUnauthHandlerOnce: [] as authStateHandler[],
-}));
+import type { authStateHandler } from 'src/use/AuthState';
 
 export const authStateUtils = () => {
   const authState = useAuthState();

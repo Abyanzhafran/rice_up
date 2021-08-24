@@ -1,4 +1,4 @@
-import type { useAuthState } from 'boot/auth';
+import type { useAuthState } from 'src/use/AuthState';
 
 declare module '@vue/runtime-core' {
   export interface ComponentCustomProperties {
