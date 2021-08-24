@@ -36,9 +36,9 @@
         </q-expansion-item>
       </q-list>
       <q-btn
+        to="/admin/requirement"
         color="primary"
-        label="Submit"
-        @click="confirm"
+        label="Next"
       />
     </div>
   </q-page>

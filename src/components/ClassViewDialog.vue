@@ -34,11 +34,6 @@
                   size="sm"
                 />
                 <span class="font-bold">{{ agencyName }}</span>
-                <q-separator
-                  class="bg-dark"
-                  vertical
-                />
-                <span>{{ agencyName }}</span>
               </div>
               <q-toolbar class="flex flex-row bg-gray-200 shadow-2">
                 <div class="flex items-center gap-1">

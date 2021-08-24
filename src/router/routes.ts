@@ -104,6 +104,10 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/dashboard/FormTeamRegister.vue'),
       },
       {
+        path: 'requirement',
+        component: () => import('pages/dashboard/Requirement.vue'),
+      },
+      {
         path: 'add_course',
         component: () => import('pages/dashboardAdmin/AddCourse.vue'),
       },
