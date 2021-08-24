@@ -2,7 +2,6 @@
   <q-card
     class="product-card cursor-pointer rounded-2xl shadow-1"
     :title="title"
-    @click="open('bottom')"
   >
     <q-img
       img-class="product-card__img"
@@ -46,24 +45,19 @@
       <small>{{ trainerName }}</small>
     </div>
   </q-card>
-
-  <class-view-dialog
-    v-model="dialog"
-    :position="position"
-  />
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import ClassViewDialog from 'components/ClassViewDialog.vue';
+// import ClassViewDialog from 'components/ClassViewDialog.vue';
 
 const formatCurrency = (n: number) => n.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
 
 export default defineComponent({
   name: 'CardProduct',
-  components: {
-    ClassViewDialog,
-  },
+  // components: {
+  //   ClassViewDialog,
+  // },
   props: {
     title: {
       type: String,

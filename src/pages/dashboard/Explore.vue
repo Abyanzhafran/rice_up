@@ -42,6 +42,7 @@
               :price="el.price"
               :discount-label="el.discountLabel"
               :discount-price="el.discountPrice"
+              @click="open('bottom')"
             />
           </template>
 
@@ -54,15 +55,21 @@
           </span>
         </div>
       </div>
+
+      <class-view-dialog
+        v-model="dialog"
+        :position="position"
+      />
     </div>
   </q-page>
 </template>
 
 <script lang="ts">
 import {
-  defineComponent, reactive, computed, toRefs,
+  defineComponent, reactive, computed, toRefs, ref,
 } from 'vue';
 import CardProduct from 'components/CardProduct.vue';
+import ClassViewDialog from 'components/ClassViewDialog.vue';
 import { useAsyncState } from '@vueuse/core';
 import { CourseClassUseCases } from 'core/CourseClass/UseCases';
 import { CourseClassRepository } from 'src/repositories';
@@ -83,8 +90,13 @@ export default defineComponent({
   name: 'AppExplore',
   components: {
     CardProduct,
+    ClassViewDialog,
   },
   setup() {
+    // Dialog
+    const dialog = ref(false);
+    const position = ref('top');
+
     const state = reactive({
       // Dummy data
       courseClassesDum: Array.from(Array(8), generateCourseClass),
@@ -107,6 +119,13 @@ export default defineComponent({
     return {
       ...toRefs(state),
       courseClasses,
+      dialog,
+      position,
+
+      open(pos: string) {
+        position.value = pos;
+        dialog.value = true;
+      },
     };
   },
 });

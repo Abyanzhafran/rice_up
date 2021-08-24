@@ -44,22 +44,13 @@
   </q-page>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useQuasar } from 'quasar';
 
 const formLists = [
   {
-    labelForm: 'Username',
-  },
-  {
     labelForm: 'Email',
-  },
-  {
-    labelForm: 'Address',
-  },
-  {
-    labelForm: 'Phone Number',
   },
 ];
 

@@ -62,8 +62,8 @@
 </template>
 
 <script lang="ts">
-import { toRefs } from '@vueuse/core';
 import { defineComponent, reactive } from 'vue';
+import { toRefs } from '@vueuse/core';
 
 // Dump data
 const generateModuleList = () => ({

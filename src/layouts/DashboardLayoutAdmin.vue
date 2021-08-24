@@ -66,12 +66,12 @@ const menuList = [
   {
     icon: 'library_books',
     label: 'Manage Modules',
-    link: '/dashboardAdmin',
+    link: '/admin',
   },
   {
     icon: 'class',
     label: 'Manage Course',
-    link: '/admin/manage_course',
+    link: '/admin/add_course',
   },
 ];
 
