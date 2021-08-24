@@ -11,5 +11,7 @@ export interface CourseClass extends Model {
     name: DataType.String;
   }>;
   price: DataType.Money;
-  aboutContent: DataType.File;
+  aboutContent: DataType.String;
+  /** unique, used as alternative of id */
+  slug: DataType.String;
 }

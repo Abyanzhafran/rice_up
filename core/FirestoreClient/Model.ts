@@ -7,7 +7,7 @@ import type { DataType, Model } from 'core/Model';
 
 export namespace FirestoreDataType {
   export interface FileStorage {
-    type: 'StorageFile';
+    _type: 'StorageFile';
     value: string;
   }
   export type File = FileStorage | DataType.FileUrl;

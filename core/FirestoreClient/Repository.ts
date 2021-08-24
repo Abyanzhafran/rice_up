@@ -22,6 +22,10 @@ export interface FirestoreClientRepositoryCtor<M extends Model, PM extends Model
   new (firestore: Firestore | DocumentReference<PM>): IFirestoreClientRepository<M>
 }
 
+export interface SubcollectionFirestoreClientRepositoryCtor<M extends Model, PM extends Model = Model> {
+  new (firestore: DocumentReference<PM>): IFirestoreClientRepository<M>
+}
+
 export class FirestoreClientRepository<M extends Model> implements IFirestoreClientRepository<M> {
   readonly converter: FirestoreDataConverter<M>;
 

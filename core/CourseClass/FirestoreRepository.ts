@@ -2,7 +2,7 @@ import { createFirestoreClientRepository } from 'core/FirestoreClient/createRepo
 import type { CourseClass } from 'core/CourseClass/Model';
 import type { CourseClassRepository } from 'core/CourseClass/Repository';
 
-const collectionName = 'COURSE_CLASSES';
+export const collectionName = 'COURSE_CLASSES';
 
 export class CourseClassFirestoreClientRepository extends createFirestoreClientRepository<CourseClass>({
   collectionName,

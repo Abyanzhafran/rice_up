@@ -12,32 +12,33 @@ export namespace DataType {
   export type Empty = null;
   export type Timestamp = Date;
   export type FileUrl = {
-    type: 'FileUrl';
+    _type: 'FileUrl';
     value: string;
   }
   export type FileBlob = {
-    type: 'FileBlob';
+    _type: 'FileBlob';
     value: Blob;
   }
   export type File = FileUrl | FileBlob;
   // eslint-disable-next-line @typescript-eslint/ban-types
   export type Ref<T extends Dict = {}> = T & {
-    type: 'Ref',
+    _type: 'Ref';
+    _lastUpdated: DataType.Timestamp;
     value: string;
   }
   export type List<T = PossibleValue> = T[];
   export type Dict<T = PossibleValue> = Record<string, T>;
   export type Primitive = DataType.String
     | DataType.Number
-    | Empty
-    | Bool;
+    | DataType.Empty
+    | DataType.Bool;
   export type PossibleValue = Primitive
-    | Timestamp
-    | File
-    | Ref;
+    | DataType.Timestamp
+    | DataType.File
+    | DataType.Ref;
   export type PossibleType<TL = PossibleValue, TD = PossibleValue> = PossibleValue
-    | List<TL>
-    | Dict<TD>;
+    | DataType.List<TL>
+    | DataType.Dict<TD>;
   // Shared DataType
   export type Money = {
     currency: DataType.String;
@@ -55,19 +56,19 @@ export interface Model {
 
 export const isRefDataType = (v: any): v is DataType.Ref => (
   !isEmpty(v)
-  && String(v.type) === 'Ref'
+  && String(v._type) === 'Ref'
 );
 
 export const isFileDataType = (v: any): v is DataType.File => (
   !isEmpty(v)
-  && String(v.type).includes('File')
+  && String(v._type).includes('File')
   && 'value' in v
 );
 
 export const isFileUrlDataType = (v: any): v is DataType.FileUrl => (
   isFileDataType(v)
-  && v?.type === 'FileUrl');
+  && v?._type === 'FileUrl');
 
 export const isFileBlobDataType = (v: any): v is DataType.FileBlob => (
   isFileDataType(v)
-  && v?.type === 'FileBlob');
+  && v?._type === 'FileBlob');

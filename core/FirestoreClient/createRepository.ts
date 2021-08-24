@@ -1,5 +1,5 @@
 import { collection, DocumentReference } from 'firebase/firestore';
-import { FirestoreClientRepository, FirestoreClientRepositoryCtor } from 'core/FirestoreClient/Repository';
+import { FirestoreClientRepository, FirestoreClientRepositoryCtor, SubcollectionFirestoreClientRepositoryCtor } from 'core/FirestoreClient/Repository';
 import type { Firestore, CollectionReference } from 'firebase/firestore';
 import type { Model } from 'core/Model';
 
@@ -23,5 +23,5 @@ export const createFirestoreClientSubcollectionRepository = function <
     constructor(private doc: DocumentReference<PM>) {
       super(collection(doc, collectionName) as CollectionReference<M>);
     }
-  } as FirestoreClientRepositoryCtor<M>;
+  } as SubcollectionFirestoreClientRepositoryCtor<M>;
 };
