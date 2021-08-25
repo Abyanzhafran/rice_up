@@ -5,7 +5,7 @@
   >
     <div class="w-full pt-2 flex flex-col gap-4">
       <div class="flex justify-between">
-        <span class="font-bold text-2xl">Module Editor</span>
+        <span class="font-bold text-2xl">Modul Teknologi Agraria</span>
         <q-btn
           to="/admin/module/list"
           class="text-blue-600 font-bold bg-white"

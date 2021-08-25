@@ -1,19 +1,46 @@
 <template>
   <q-card class="product-card shadow-1 rounded-xl">
     <router-link to="/admin/module/list">
-      <img :src="image">
+      <img
+        v-ripple
+        :src="image"
+        class="h-32"
+      >
+    </router-link>
 
-      <q-card-section class="flex items-center gap-2">
+    <q-card-action
+      class="flex flex-row items-center justify-between p-2 ml-2"
+    >
+      <span>
         <q-icon
-          class="text-blue-500"
+          class="text-blue-500 mr-1"
           :name="icon"
           size="sm"
         />
-        <div class="text-md font-semibold">
-          {{ moduleName }}
-        </div>
-      </q-card-section>
-    </router-link>
+        {{ moduleName }}
+      </span>
+      <q-btn
+        flat
+        round
+        icon="more_vert"
+        size="md"
+      >
+        <q-menu
+          auto-close
+          transition-show="jump-down"
+          transition-hide="jump-up"
+        >
+          <q-list>
+            <q-item clickable>
+              <q-item-section>Edit</q-item-section>
+            </q-item>
+            <q-item clickable>
+              <q-item-section>Remove</q-item-section>
+            </q-item>
+          </q-list>
+        </q-menu>
+      </q-btn>
+    </q-card-action>
   </q-card>
 </template>
 
@@ -44,7 +71,7 @@ export default defineComponent({
 
 <style lang="scss">
 .product-card {
-  width: 170px;
+  width: 220px;
   // max-width: 250px !important;
 
   &__img {

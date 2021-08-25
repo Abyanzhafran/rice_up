@@ -11,75 +11,80 @@
           label="Add More Course"
           flat
           icon="add"
+          @click="addMoreCourse"
         />
       </div>
-      <q-list>
-        <q-expansion-item
-          v-for="(n, input) in inputs"
-          :key="input"
-          expand-icon-toggle
-          popup
-        >
-          <template #header>
-            <q-item-section>
-              <div class="flex items-center gap-2">
-                <q-icon
-                  :name="n.icon"
-                  size="sm"
-                />
-                <span>{{ n.order }}</span>
-              </div>
-            </q-item-section>
-            <q-btn
-              icon="delete"
-              color="red"
-              round
-              flat
-            />
-          </template>
-          <q-card>
-            <q-card-section class="flex flex-col gap-2">
-              <q-input
-                v-for="(i, formList) in formLists"
-                :key="formList"
-                v-model="text"
-                outlined
-                :label="i.labelForm"
-              />
-              <q-uploader
-                class="mt-4"
-                url="http://localhost:4444/upload"
-                label="Upload Thumbnail"
-                color="primary"
-                square
+      <template v-if="listsDump.length">
+        <q-list>
+          <q-expansion-item
+            v-for="(el, n) in listsDump"
+            :key="n"
+            expand-icon-toggle
+            popup
+          >
+            <template #header>
+              <q-item-section>
+                <div class="flex items-center gap-2">
+                  <q-icon
+                    :name="el.icon"
+                    size="sm"
+                  />
+                  <span>{{ el.title }}</span>
+                </div>
+              </q-item-section>
+              <q-btn
+                icon="delete"
+                color="red"
+                round
                 flat
-                bordered
-                clas
-                style="max-width: 300px"
+                @click="deleteCourse"
               />
-              <div class="flex gap-2 pt-2">
-                <q-btn
-                  class="rounded-md"
-                  color="green"
-                  label="Save"
+            </template>
+            <q-card>
+              <q-card-section class="flex flex-col gap-2">
+                <q-input
+                  v-for="(i, formList) in formLists"
+                  :key="formList"
+                  v-model="text"
+                  outlined
+                  :label="i.labelForm"
                 />
-                <q-btn
-                  class="rounded-md"
-                  color="red"
-                  label="Reset"
+                <q-uploader
+                  class="mt-4"
+                  url="http://localhost:4444/upload"
+                  label="Upload Thumbnail"
+                  color="primary"
+                  square
+                  flat
+                  bordered
+                  clas
+                  style="max-width: 300px"
                 />
-              </div>
-            </q-card-section>
-          </q-card>
-        </q-expansion-item>
-      </q-list>
+                <div class="flex gap-2 pt-2">
+                  <q-btn
+                    class="rounded-md"
+                    color="green"
+                    label="Save"
+                  />
+                  <q-btn
+                    class="rounded-md"
+                    color="red"
+                    label="Reset"
+                  />
+                </div>
+              </q-card-section>
+            </q-card>
+          </q-expansion-item>
+        </q-list>
+      </template>
     </div>
   </q-page>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
-import { useQuasar } from 'quasar';
+import {
+  defineComponent, ref, reactive, toRefs,
+} from 'vue';
 
 const formLists = [
   {
@@ -96,47 +101,45 @@ const formLists = [
   },
 ];
 
-const inputs = [
-  {
-    order: 'Untitled',
-    icon: 'class',
-  },
-  {
-    order: 'Untitled',
-    icon: 'class',
-  },
-];
+const generateList = () => ({
+  icon: 'class',
+  title: 'Untitled',
+});
 
 export default defineComponent({
   name: 'AddCourse',
+  props: {
+    title: {
+      type: String,
+      default: '',
+    },
+    icon: {
+      type: String,
+      default: '',
+    },
+  },
   setup() {
-    const $q = useQuasar();
-
-    function confirm() {
-      $q.dialog({
-        title: 'Konfirmasi',
-        message: 'Yakin data tim sudah benar ?',
-        cancel: true,
-        persistent: true,
-      }).onOk(() => {
-        // console.log('>>>> OK')
-      }).onOk(() => {
-        // console.log('>>>> second OK catcher')
-      }).onCancel(() => {
-        // console.log('>>>> Cancel')
-      })
-        .onDismiss(() => {
-        // console.log('I am triggered on both OK and Cancel')
-        });
-    }
+    const state = reactive({
+      listsDump: Array.from(Array(3), generateList),
+    });
 
     return {
       text: ref(''),
       ph: ref(''),
+      ...toRefs(state),
       formLists,
-      inputs,
-      confirm,
     };
+  },
+  methods: {
+    addMoreCourse() {
+      this.listsDump.push({
+        title: 'Untitled_1',
+        icon: 'class',
+      });
+    },
+    deleteCourse(el) {
+      this.listsDump.splice(el, 1);
+    },
   },
 });
 </script>

@@ -17,6 +17,7 @@
             class="text-blue-600 font-bold normal-case"
             flat
             label="Mark all as read"
+            @click="isMark = !isMark"
           />
         </div>
       </q-banner>
@@ -49,7 +50,7 @@
             <q-item-label caption>
               <q-icon
                 name="info"
-                color="green"
+                :color="[isMark ? 'green' : 'grey']"
                 size="xs"
               />
             </q-item-label>
@@ -61,7 +62,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   name: 'Notification',
@@ -75,8 +76,10 @@ export default defineComponent({
       default: '11/10/2016, 11:49:36 AM',
     },
   },
-  // setup() {
-
-  // },
+  setup() {
+    return {
+      isMark: ref(true),
+    };
+  },
 });
 </script>

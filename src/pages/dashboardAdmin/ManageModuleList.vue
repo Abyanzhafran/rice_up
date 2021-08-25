@@ -4,13 +4,22 @@
     class="w-full bg-gray-50 max-w-screen-sm mx-auto flex justify-center items-start"
   >
     <div class="w-full pt-2 flex flex-col gap-4">
-      <div class="flex justify-between">
-        <span class="font-bold text-2xl">Manage List</span>
+      <div class="flex flex-col gap-2">
+        <div class="flex justify-between">
+          <span class="font-bold text-2xl">Manage List</span>
+          <q-btn
+            to="/admin"
+            class="text-blue-600 font-bold bg-white"
+            round
+            icon="arrow_back"
+          />
+        </div>
         <q-btn
-          to="/admin"
-          class="text-blue-600 font-bold bg-white"
-          round
-          icon="arrow_back"
+          class="text-dark font-bold"
+          label="Add Module"
+          flat
+          icon="add"
+          @click="addModule"
         />
       </div>
       <q-list
@@ -21,16 +30,10 @@
           <q-item
             v-for="el, i in modulesListDump"
             :key="i"
-            v-ripple
             :module-icon="moduleIcon"
             :module-label="moduleLabel"
             :module-caption="moduleCaption"
-            :chap-icon="chapIcon"
-            :chap-label="chapLabel"
-            :chap-caption="chapCaption"
-            :chap-review="chapReview"
             class="border"
-            clickable
           >
             <q-item-section avatar>
               <q-avatar :icon="moduleIcon" />
@@ -46,13 +49,30 @@
               </router-link>
             </q-item-section>
             <q-item-section side>
-              <q-item-label caption>
-                <q-icon
-                  name="info"
-                  color="green"
-                  size="xs"
-                />
-              </q-item-label>
+              <q-btn
+                flat
+                round
+                icon="more_vert"
+                size="md"
+              >
+                <q-menu
+                  auto-close
+                  transition-show="jump-down"
+                  transition-hide="jump-up"
+                >
+                  <q-list>
+                    <q-item clickable>
+                      <q-item-section>Edit</q-item-section>
+                    </q-item>
+                    <q-item
+                      clickable
+                      @click="deleteModule"
+                    >
+                      <q-item-section>Remove</q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-menu>
+              </q-btn>
             </q-item-section>
           </q-item>
         </template>
@@ -70,10 +90,6 @@ const generateModuleList = () => ({
   moduleIcon: 'mail',
   moduleLabel: 'Modul Teknologi Agraria',
   moduleCaption: 'Pengenalan Teknologi Drone',
-  chapIcon: 'description',
-  chapLabel: 'Bab 1',
-  ChapLabel: 'Pengenalan Drone',
-  ChapReview: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid',
 });
 // End dump
 export default defineComponent({
@@ -94,22 +110,6 @@ export default defineComponent({
       default: 'Pengenalan Teknologi Drone',
       required: true,
     },
-    chapIcon: {
-      type: String,
-      default: 'description',
-    },
-    chapLabel: {
-      type: String,
-      default: 'Bab 1',
-    },
-    chapCaption: {
-      type: String,
-      default: 'Pengenalan Drone',
-    },
-    chapReview: {
-      type: String,
-      default: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid',
-    },
   },
   setup() {
     // Dump data
@@ -121,6 +121,18 @@ export default defineComponent({
     return {
       ...toRefs(state),
     };
+  },
+  methods: {
+    addModule() {
+      this.modulesListDump.push({
+        moduleIcon: 'mail',
+        moduleLabel: 'Intro Drone',
+        moduleCaption: 'Pengenalan Teknologi Drone',
+      });
+    },
+    deleteModule(el) {
+      this.modulesListDump.splice(el, 1);
+    },
   },
 });
 </script>
