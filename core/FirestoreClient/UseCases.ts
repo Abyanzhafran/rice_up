@@ -3,7 +3,7 @@ import type { Model } from 'core/Model';
 
 export class FirestoreClientUseCase<M extends Model> {
   constructor(
-    private repository: IFirestoreClientRepository<M>,
+    protected repository: IFirestoreClientRepository<M>,
   ) {
     //
   }

@@ -7,138 +7,131 @@
       <div class="flex justify-between mx-5 pb-4">
         <span class="font-bold text-2xl">Manage Course</span>
         <q-btn
-          class="text-dark font-bold"
           label="Add More Course"
-          flat
           icon="add"
-          @click="addMoreCourse"
+          flat
+          class="text-dark font-bold"
+          @click="onAddCourseClick"
         />
       </div>
-      <template v-if="listsDump.length">
-        <q-list>
-          <q-expansion-item
-            v-for="(el, n) in listsDump"
-            :key="n"
-            expand-icon-toggle
-            popup
-          >
-            <template #header>
-              <q-item-section>
-                <div class="flex items-center gap-2">
-                  <q-icon
-                    :name="el.icon"
-                    size="sm"
-                  />
-                  <span>{{ el.title }}</span>
-                </div>
-              </q-item-section>
-              <q-btn
-                icon="delete"
-                color="red"
-                round
-                flat
-                @click="deleteCourse"
+
+      <q-list v-if="courseClasses.length">
+        <q-expansion-item
+          v-for="el in courseClasses"
+          :key="el._uid"
+          expand-icon="edit"
+          expanded-icon="close"
+          popup
+        >
+          <template #header>
+            <q-item-section>
+              <div class="flex items-center gap-2">
+                <q-icon
+                  name="class"
+                  size="sm"
+                />
+                <span>{{ el.title }}</span>
+              </div>
+            </q-item-section>
+
+            <q-btn
+              icon="delete"
+              color="negative"
+              round
+              flat
+              @click="onDeleteCourseClick(el._uid)"
+            />
+          </template>
+
+          <q-card>
+            <q-card-section class="flex flex-col gap-2">
+              <form-course-class-edit
+                :data="el"
+                class="w-full"
+                @submit="payload => onCourseFormSubmit(el._uid, payload)"
               />
-            </template>
-            <q-card>
-              <q-card-section class="flex flex-col gap-2">
-                <q-input
-                  v-for="(i, formList) in formLists"
-                  :key="formList"
-                  v-model="text"
-                  outlined
-                  :label="i.labelForm"
-                />
-                <q-uploader
-                  class="mt-4"
-                  url="http://localhost:4444/upload"
-                  label="Upload Thumbnail"
-                  color="primary"
-                  square
-                  flat
-                  bordered
-                  clas
-                  style="max-width: 300px"
-                />
-                <div class="flex gap-2 pt-2">
-                  <q-btn
-                    class="rounded-md"
-                    color="green"
-                    label="Save"
-                  />
-                  <q-btn
-                    class="rounded-md"
-                    color="red"
-                    label="Reset"
-                  />
-                </div>
-              </q-card-section>
-            </q-card>
-          </q-expansion-item>
-        </q-list>
-      </template>
+            </q-card-section>
+          </q-card>
+        </q-expansion-item>
+      </q-list>
+
+      <span
+        v-else
+        class="w-full max-w-prose py-10 text-body2 text-gray-400 text-center"
+      >Anda tidak memiliki kelas, silahkan tambahkan kelas untuk menambahkan</span>
     </div>
   </q-page>
 </template>
 
 <script lang="ts">
 import {
-  defineComponent, ref, reactive, toRefs,
+  defineComponent, reactive, toRefs, computed,
 } from 'vue';
+import { Notify } from 'quasar';
+import FormCourseClassEdit from 'components/FormCourseClassEdit.vue';
+import { CourseClassUseCases } from 'src/useCases/CourseClass';
+import { useAuthState } from 'src/use/AuthState';
+import { getErrMsg } from 'src/uiHelpers';
+import type { CourseClassObject } from 'src/data/CourseClass';
+import type { FormCourseClassEdit as TFormCourseClassEdit } from 'src/types';
 
-const formLists = [
-  {
-    labelForm: 'Title',
-  },
-  {
-    labelForm: 'Price',
-  },
-  {
-    labelForm: 'Discount Price',
-  },
-  {
-    labelForm: 'Free Label',
-  },
-];
-
-const generateList = () => ({
-  icon: 'class',
-  title: 'Untitled',
-});
+interface RequiredCourseItemProps {
+  _uid: string;
+  title: string;
+}
 
 export default defineComponent({
   name: 'AddCourse',
-  props: {
-    title: {
-      type: String,
-      default: '',
-    },
-    icon: {
-      type: String,
-      default: '',
-    },
-  },
+  components: { FormCourseClassEdit },
   setup() {
+    const authState = useAuthState();
     const state = reactive({
-      listsDump: Array.from(Array(3), generateList),
+      courseClasses: [] as CourseClassObject[],
+      // if true it will push new item into `courseClasses`
+      isAppendNewCourse: false,
     });
+    const courseClassesUI = computed<(RequiredCourseItemProps | CourseClassObject)[]>(
+      () => (state.isAppendNewCourse
+        ? [{ _uid: 'new-instance', title: 'Untitled' }, ...state.courseClasses]
+        : state.courseClasses));
+    const updateCourseClassList = async () => {
+      const data = await CourseClassUseCases.getAuthorizedListOnly();
+      state.courseClasses = await Promise.all(data.map((el) => CourseClassUseCases.SnapshotToObject(el)));
+    };
+
+    authState.afterAuthHandlerOnce.push(updateCourseClassList);
 
     return {
-      text: ref(''),
-      ph: ref(''),
       ...toRefs(state),
-      formLists,
+      courseClasses: courseClassesUI,
+      updateCourseClassList,
     };
   },
   methods: {
-    addMoreCourse() {
-      this.listsDump.push({
-        title: 'Untitled_1',
-        icon: 'class',
-      });
+    onAddCourseClick() {
+      this.isAppendNewCourse = true;
     },
-    deleteCourse(el) {
-      this.listsDump.splice(el, 1);
+    onDeleteCourseClick(id: string) {
+      if (id === 'new-instance') {
+        this.isAppendNewCourse = false;
+      }
+
+      console.log('deleting...');
+    },
+    onCourseFormSubmit(id: string, payload: TFormCourseClassEdit.SubmitPayload) {
+      if (id === 'new-instance') {
+        CourseClassUseCases.create(payload)
+          .then(() => {
+            this.isAppendNewCourse = false;
+            void this.updateCourseClassList();
+          })
+          .catch((err) => Notify.create({ type: 'negative', message: getErrMsg(err) }));
+      }
+      // void CourseClassUseCases
+      //   .update({
+      //     _uid: id,
+      //     ...payload,
+      //   });
     },
   },
 });

@@ -21,6 +21,7 @@
             />
           </q-popup-edit>
         </span>
+
         <q-btn
           class="text-dark font-bold"
           label="Add folder"
@@ -88,7 +89,7 @@ export default defineComponent({
         image: 'https://picsum.photos/100/100',
       });
     },
-    deleteFolder(el) {
+    deleteFolder(el: number) {
       this.modulesDump.splice(el, 1);
     },
   },

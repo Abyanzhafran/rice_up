@@ -2,6 +2,7 @@
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import { connectAuthEmulator, getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
+import { getStorage, connectStorageEmulator } from 'firebase/storage';
 import firebaseJson from 'app/firebase.json';
 
 const DEFAULT_EMULATOR_HOST = 'localhost';
@@ -11,14 +12,16 @@ const app = getApps().length
   : initializeApp(JSON.parse(atob(String(process.env.FIREBASE_CONFIG))));
 const db = getFirestore(app);
 const auth = getAuth(app);
+const storage = getStorage(app);
 
 const connectToEmulator = (() => {
   const connect = () => {
     console.log('connecting to emulator...');
 
     try {
-      connectFirestoreEmulator(db, DEFAULT_EMULATOR_HOST, firebaseJson.emulators.firestore.port);
       connectAuthEmulator(auth, `http://${DEFAULT_EMULATOR_HOST}:${firebaseJson.emulators.auth.port}`);
+      connectFirestoreEmulator(db, DEFAULT_EMULATOR_HOST, firebaseJson.emulators.firestore.port);
+      connectStorageEmulator(storage, DEFAULT_EMULATOR_HOST, firebaseJson.emulators.storage.port);
     } catch (err) {
       console.error(err);
     }
@@ -42,7 +45,8 @@ const authProvider = new GoogleAuthProvider();
 
 export {
   app as fbApp,
-  db,
   auth,
   authProvider,
+  db,
+  storage,
 };

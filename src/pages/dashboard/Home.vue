@@ -115,17 +115,18 @@
         <span class="font-bold text-2xl text-left">Kelas Populer</span>
       </div>
 
-      <div class="flex flex-col my-4">
-        <div class="flex flex-row justify-center gap-x-3 gap-y-6 max-w-sm">
-          <template v-if="courseClassesDum.length">
+      <div class="self-center flex flex-col my-4">
+        <div class="flex flex-row justify-start gap-x-3 gap-y-6 max-w-sm">
+          <template v-if="courseClasses.length">
             <card-product
-              v-for="el, i in courseClassesDum"
+              v-for="el, i in courseClasses"
               :key="i"
               :title="el.title"
               :trainer-name="el.trainerName"
-              :price="el.price"
-              :discount-label="el.discountLabel"
-              :discount-price="el.discountPrice"
+              :thumbnail-src="el.thumbnailSrc"
+              :price="el.price.value"
+              :discount-label="el.label"
+              :discount-price="el.discountPrice.value"
               @click="open('bottom')"
             />
           </template>
@@ -150,40 +151,19 @@
 
 <script lang="ts">
 import {
-  defineComponent, reactive, computed, toRefs, ref,
+  defineComponent, reactive, toRefs,
 } from 'vue';
 import { useAsyncState } from '@vueuse/core';
 import CardProduct from 'src/components/CardProduct.vue';
 import ClassViewDialog from 'components/ClassViewDialog.vue';
-import { CourseClassUseCases } from 'core/CourseClass/UseCases';
-import { CourseClassRepository } from 'src/repositories';
+import { CourseClassUseCases } from 'src/useCases/CourseClass';
 
 const slides = [
-  {
-    name: 'tv',
-  },
-  {
-    name: 'hp',
-  },
-  {
-    name: 'laptop',
-  },
-  {
-    name: 'mount',
-  },
+  { name: 'tv' },
+  { name: 'hp' },
+  { name: 'laptop' },
+  { name: 'mount' },
 ];
-
-// Dummy Var
-const randBool = () => Math.random() > 0.5;
-
-const generateCourseClass = () => ({
-  title: 'Perluasan lahan sengketa dengan Cepat!',
-  trainerName: 'BUMN',
-  price: Math.random() * 100_000,
-  discountPrice: randBool() ? Math.random() * 100_000 : NaN,
-  discountLabel: randBool() ? '50%' : '',
-});
-// End Dummy
 
 export default defineComponent({
   components: {
@@ -191,38 +171,38 @@ export default defineComponent({
     ClassViewDialog,
   },
   setup() {
-    // Dialog
-    const dialog = ref(false);
-    const position = ref('top');
-
     const state = reactive({
-      // Dummy data
-      courseClassesDum: Array.from(Array(8), generateCourseClass),
-      // End Dummy
+      dialog: false,
+      position: 'top',
       slide: 'style',
       lorem: 'Beli Kelas Lebih Murah',
       slides,
     });
-    const useCase = new CourseClassUseCases(CourseClassRepository);
-    const { state: courses } = useAsyncState(useCase.getAll(), []);
-    const courseClasses = computed(() => courses.value.map((c) => ({
-      title: c.title,
-      trainerName: c.trainer.name,
-      price: c.price,
-      thumbnailSrc: c.thumbnailSrc.value,
-      discountPrice: c.discountPrice,
-      discountLabel: c.discountLabel,
-    })));
+    const { state: courses } = useAsyncState(async () => {
+      const res = await CourseClassUseCases.getAll();
+
+      return Promise.all(res
+        .map(async (el) => {
+          const data = await CourseClassUseCases.SnapshotToObject(el);
+
+          return {
+            title: data.title,
+            trainerName: data.trainer.name,
+            price: data.price,
+            thumbnailSrc: data.thumbnailSrc,
+            discountPrice: data.discountPrice,
+            label: data.label,
+          };
+        }));
+    }, []);
 
     return {
       ...toRefs(state),
-      courseClasses,
-      dialog,
-      position,
+      courseClasses: courses,
 
       open(pos: string) {
-        position.value = pos;
-        dialog.value = true;
+        state.position = pos;
+        state.dialog = true;
       },
     };
   },

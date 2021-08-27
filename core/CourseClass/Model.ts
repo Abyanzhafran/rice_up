@@ -10,6 +10,9 @@ export interface CourseClass extends Model {
     name: DataType.String;
   }>;
   price: DataType.Money;
+  /** should not up to 4 chars */
+  label: DataType.String;
+  discountPrice: DataType.Money;
   headerMediaSrc: {
     _type: 'YoutubeEmbed';
     value: DataType.String;
