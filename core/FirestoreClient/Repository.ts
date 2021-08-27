@@ -1,17 +1,18 @@
 import {
   doc, getDoc, getDocs, addDoc, updateDoc, query, where,
 } from 'firebase/firestore';
+import { modelDataTypeToFirestoreDataType, firestoreDataTypeToModelDataType } from 'core/FirestoreClient/Model';
 import type {
   DocumentReference, CollectionReference, QueryDocumentSnapshot, SnapshotOptions,
   Query, FirestoreDataConverter, Firestore,
 } from 'firebase/firestore';
-import { modelDataTypeToFirestoreDataType, firestoreDataTypeToModelDataType } from 'core/FirestoreClient/Model';
 import type { Model } from 'core/Model';
 import type { ModelToFirestoreModel as ModelToFsModel } from 'core/FirestoreClient/Model';
 
 export interface IFirestoreClientRepository<M extends Model> {
   get(id: string): Promise<M | undefined>;
   getAll(): Promise<M[]>;
+  where(q: Parameters<typeof where>[]): Promise<M[]>;
   create(data: Omit<M, '_uid' | '_created' | '_updated' | '_deleted'>): Promise<() => Promise<M>>;
   update(data: Omit<Partial<M>, '_created' | '_updated' | '_deleted'> & Pick<M, '_uid'>): Promise<void>;
   delete(id: string): Promise<void>;
@@ -44,6 +45,17 @@ export class FirestoreClientRepository<M extends Model> implements IFirestoreCli
 
   public async getAll() {
     const snaps = await this._execQuery(this.collectionRef);
+
+    return snaps.docs.map((snap) => snap.data());
+  }
+
+  /** please dont include `_deleted` to q */
+  public async where(q: Parameters<typeof where>[], includeDeleted = false) {
+    const queries = q.map(([path, opStr, value]) => where(path, opStr, value));
+    const snaps = await this._execQuery(
+      query(this.collectionRef, ...queries),
+      includeDeleted,
+    );
 
     return snaps.docs.map((snap) => snap.data());
   }

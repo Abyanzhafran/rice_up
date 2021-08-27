@@ -49,15 +49,11 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-// import ClassViewDialog from 'components/ClassViewDialog.vue';
 
-const formatCurrency = (n: number) => n.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
+const formatCurrency = (n: number, currency = 'IDR') => n.toLocaleString('id-ID', { style: 'currency', currency });
 
 export default defineComponent({
   name: 'CardProduct',
-  // components: {
-  //   ClassViewDialog,
-  // },
   props: {
     title: {
       type: String,

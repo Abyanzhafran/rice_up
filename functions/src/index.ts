@@ -1,9 +1,14 @@
-// import * as functions from "firebase-functions";
+import * as functions from "firebase-functions";
+import { UserCollection } from './data/User';
+import { attrFactories } from './useCases/firestore';
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+export const onUserCreated = functions.auth.user().onCreate((user) => {
+  const docRef = UserCollection.doc(user.uid)
+
+  // because we only has Google login method so, it will always has email and name
+  return docRef.create({
+    name: user.displayName!,
+    email: user.email!,
+    ...attrFactories.create(),
+  })
+})

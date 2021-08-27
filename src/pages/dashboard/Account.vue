@@ -69,10 +69,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { uid } from 'quasar';
 import { asyncComputed } from '@vueuse/core';
-import { useMyCourseClassUseCases } from 'src/use/MyCourseClassUseCases';
-import type { MyCourseClass } from 'core/MyCourseClass/Model';
+import { MyCourseClassUseCases } from 'src/useCases/MyCourseClass';
+import type { MyCourseClass } from 'src/data/MyCourseClass';
 
 const countProgressPercent = (progress: MyCourseClass['progress']) => {
   if (progress.length) {
@@ -86,23 +85,6 @@ const countProgressPercent = (progress: MyCourseClass['progress']) => {
 
   return 0;
 };
-
-const generateMyCourseClass = () => ({
-  _uid: uid(),
-  _created: new Date(),
-  _updated: new Date(),
-  _deleted: null,
-  course: {
-    _type: 'Ref',
-    value: uid(),
-    name: 'Perluasan lahan sengketa dengan Cepat!',
-    slug: 'perlahan-luas-dengan-sengketa-cepat',
-    trainerName: 'Kemensos',
-    _lastUpdated: new Date(),
-  },
-  progress: [],
-  completed: false,
-} as MyCourseClass);
 
 export default defineComponent({
   name: 'Account',
@@ -121,12 +103,18 @@ export default defineComponent({
     },
   },
   setup() {
-    const { useCase } = useMyCourseClassUseCases();
     const myCourseClasses = asyncComputed(async () => {
-      const data = await useCase.value?.getAll() ?? [] as MyCourseClass[];
+      const snapshots = await MyCourseClassUseCases.getAll();
 
-      return [...data, ...Array.from(Array(7), generateMyCourseClass)]
-        .map(({ progress, ...el }) => ({ ...el, progress: countProgressPercent(progress) }));
+      return snapshots.map((el) => {
+        const { progress, ...data } = el.data();
+
+        return {
+          ...data,
+          _uid: el.id,
+          progress: countProgressPercent(progress),
+        };
+      });
     }, []);
 
     return {

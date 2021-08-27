@@ -12,7 +12,7 @@
           icon="menu"
           @click="drawer = !drawer"
         />
-        <q-toolbar-title>Header</q-toolbar-title>
+        <q-toolbar-title>Admin</q-toolbar-title>
       </q-toolbar>
     </q-header>
 
@@ -26,28 +26,21 @@
     >
       <q-scroll-area class="h-[calc(100%)] border-r">
         <q-list>
-          <template
+          <q-item
             v-for="(menuItem, index) in menuList"
             :key="index"
+            v-ripple
+            :to="menuItem.link"
+            clickable
+            exact
           >
-            <q-item
-              v-ripple
-              clickable
-              :active="menuItem.label === 'Outbox'"
-            >
-              <router-link
-                :to="menuItem.link"
-                class="flex flex-row"
-              >
-                <q-item-section avatar>
-                  <q-icon :name="menuItem.icon" />
-                </q-item-section>
-                <q-item-section>
-                  {{ menuItem.label }}
-                </q-item-section>
-              </router-link>
-            </q-item>
-          </template>
+            <q-item-section avatar>
+              <q-icon :name="menuItem.icon" />
+            </q-item-section>
+            <q-item-section>
+              {{ menuItem.label }}
+            </q-item-section>
+          </q-item>
         </q-list>
       </q-scroll-area>
     </q-drawer>

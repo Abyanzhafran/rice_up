@@ -130,7 +130,7 @@ export default defineComponent({
         moduleCaption: 'Pengenalan Teknologi Drone',
       });
     },
-    deleteModule(el) {
+    deleteModule(el: number) {
       this.modulesListDump.splice(el, 1);
     },
   },
