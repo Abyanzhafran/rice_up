@@ -45,6 +45,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/dashboard/Notification.vue'),
       },
       {
+        path: 'requirement',
+        name: 'AppRequirement',
+        component: () => import('pages/dashboard/Requirement.vue'),
+      },
+      {
         path: 'invite_notif',
         name: 'AppInviteNotification',
         component: () => import('pages/dashboard/InvitationNotif.vue'),
@@ -68,6 +73,11 @@ const routes: RouteRecordRaw[] = [
         path: 'setting',
         name: 'AppSettings',
         component: () => import('pages/dashboard/Setting.vue'),
+      },
+      {
+        path: 'edit_biodata',
+        name: 'AppEditBiodata',
+        component: () => import('pages/dashboard/EditBiodata.vue'),
       },
     ],
   },
@@ -107,10 +117,6 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'formregister',
         component: () => import('pages/dashboard/FormTeamRegister.vue'),
-      },
-      {
-        path: 'requirement',
-        component: () => import('pages/dashboard/Requirement.vue'),
       },
       {
         path: 'add_course',

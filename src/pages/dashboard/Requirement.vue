@@ -30,11 +30,19 @@
       </q-stepper>
       <div class="q-gutter-sm">
         <q-checkbox
-          v-model="right"
+          v-model="isAgree"
           label="Saya menjetujui persyaratan dan ketentuan berlaku"
         />
       </div>
       <q-btn
+        v-if="isAgree == false"
+        color="primary"
+        label="Submit"
+        disable
+        @click="confirm"
+      />
+      <q-btn
+        v-else
         color="primary"
         label="Submit"
         @click="confirm"
@@ -48,7 +56,7 @@ import { defineComponent, ref } from 'vue';
 import { useQuasar } from 'quasar';
 
 export default defineComponent({
-  name: 'Requirement',
+  name: 'AppRequirement',
   setup() {
     const $q = useQuasar();
 
@@ -72,7 +80,7 @@ export default defineComponent({
 
     return {
       step: ref(1),
-      right: ref(false),
+      isAgree: ref(false),
       confirm,
     };
   },
