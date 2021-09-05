@@ -57,7 +57,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'stuff',
         name: 'AppStuff',
-        component: () => import('pages/dashboard/Talent.vue'),
+        component: () => import('pages/dashboard/Tools.vue'),
       },
       {
         path: 'stuff/:stuffId',

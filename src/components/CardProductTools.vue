@@ -7,9 +7,9 @@
           class="rounded-2xl"
           :ratio="4/3"
         >
-        <div class="font-semibold pt-2">
+        <span class="font-semibold my-2 mt-2">
           {{ title }}
-        </div>
+        </span>
       </q-card-section>
     </router-link>
   </q-card>
@@ -27,7 +27,7 @@ export default defineComponent({
     },
     thumbnailToolsSrc: {
       type: String,
-      default: 'https://via.placeholder.com/100',
+      default: 'https://via.placeholder.com/200',
     },
   },
 });

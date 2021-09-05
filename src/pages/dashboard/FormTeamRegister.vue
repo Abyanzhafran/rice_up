@@ -36,7 +36,7 @@
         </q-expansion-item>
       </q-list>
       <q-btn
-        to="/admin/requirement"
+        to="/app/requirement"
         color="primary"
         label="Next"
       />

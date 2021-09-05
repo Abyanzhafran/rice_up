@@ -39,6 +39,7 @@
               :key="i"
               :title="el.title"
               :trainer-name="el.trainerName"
+              :thumbnail-src="el.thumbnailSrc"
               :price="el.price.value"
               :discount-label="el.label"
               :discount-price="el.discountPrice.value"

@@ -115,8 +115,6 @@ export default defineComponent({
       if (id === 'new-instance') {
         this.isAppendNewCourse = false;
       }
-
-      console.log('deleting...');
     },
     onCourseFormSubmit(id: string, payload: TFormCourseClassEdit.SubmitPayload) {
       if (id === 'new-instance') {

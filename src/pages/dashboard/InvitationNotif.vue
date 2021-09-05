@@ -4,7 +4,15 @@
     class="w-full bg-gray-50 max-w-screen-sm mx-auto flex justify-center items-start"
   >
     <div class="w-full pt-2 flex flex-col gap-4">
-      <span class="text-2xl font-bold">{{ title }}</span>
+      <div class="flex justify-between">
+        <span class="text-2xl font-bold">{{ title }}</span>
+        <q-btn
+          to="/app/notification"
+          class="text-blue-600 font-bold bg-white"
+          round
+          icon="arrow_back"
+        />
+      </div>
       <div class="flex flex-col mt-4 gap-6">
         <q-item>
           <q-item-section avatar>

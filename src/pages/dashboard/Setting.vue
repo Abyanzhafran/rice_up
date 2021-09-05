@@ -16,12 +16,12 @@
         <q-item-section avatar>
           <q-avatar
             icon="logout"
-            class="text-red-300"
+            class="text-red-500"
           />
         </q-item-section>
 
         <q-item-section>
-          <q-item-label class="text-red-300">
+          <q-item-label class="text-red-500">
             Keluar
           </q-item-label>
         </q-item-section>

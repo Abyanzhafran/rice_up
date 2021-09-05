@@ -22,6 +22,13 @@
           :rows="rows"
           row-key="name"
         />
+        <div class="flex flex-col mt-4 gap-2">
+          <span class="font-bold text-xl">$1,241.00</span>
+          <q-btn
+            class="bg-blue-500 text-white"
+            label="Beli Sekarang"
+          />
+        </div>
       </div>
     </div>
   </q-page>
