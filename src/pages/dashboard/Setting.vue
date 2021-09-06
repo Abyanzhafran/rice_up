@@ -16,16 +16,33 @@
         <q-item-section avatar>
           <q-avatar
             icon="logout"
-            class="text-red-500"
+            class="text-red-600"
           />
         </q-item-section>
 
         <q-item-section>
-          <q-item-label class="text-red-500">
+          <q-item-label class="text-red-600">
             Keluar
           </q-item-label>
         </q-item-section>
       </q-item>
+      <!-- <q-item
+        v-ripple
+        clickable
+      >
+        <q-item-section avatar>
+          <q-avatar
+            icon="settings"
+            class="text-dark"
+          />
+        </q-item-section>
+
+        <q-item-section>
+          <q-item-label class="text-dark">
+            Setting
+          </q-item-label>
+        </q-item-section>
+      </q-item> -->
     </q-list>
   </q-page>
 </template>

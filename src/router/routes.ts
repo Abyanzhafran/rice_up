@@ -79,6 +79,16 @@ const routes: RouteRecordRaw[] = [
         name: 'AppEditBiodata',
         component: () => import('pages/dashboard/EditBiodata.vue'),
       },
+      {
+        path: 'rent',
+        name: 'AppRent',
+        component: () => import('pages/dashboard/Rent.vue'),
+      },
+      {
+        path: 'rent_detail',
+        name: 'AppRentDetail',
+        component: () => import('pages/dashboard/RentDetail.vue'),
+      },
     ],
   },
   {

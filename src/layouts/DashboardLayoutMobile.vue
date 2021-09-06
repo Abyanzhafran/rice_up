@@ -63,6 +63,13 @@
           exact
         />
         <q-route-tab
+          label="Sewa"
+          name="sewa"
+          icon="vpn_key"
+          :to="{name: 'AppRent'}"
+          exact
+        />
+        <q-route-tab
           label="Akun"
           name="akun"
           icon="person"
